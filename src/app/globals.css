@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #fff
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .select-size{
+    background-color: #ffff;
+    color: #000;
+    padding: 10px 80px;
+    border-radius: 5px;
+    margin: 12px;
+    cursor: pointer;
+    transition: all linear 0.3s;
+  }
+  .select-size:hover{
+    background-color: #000;
+    color: #ffff;
+  }
+}
+
+/* IncrementDecrementBtn.css */
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #F5F8FB;
+  transition: border 0.3s ease;
+}
+
+.btn-group:hover {
+    border: 1px solid #4097fe
+}
+
+.quantity-btn button {
+  width: 40px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4097fe;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn button:hover {
+  background-color: #f3f9ff;
+}
+
+.quantity-btn p {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #F5F8FB;
+  border-right: 1px solid #F5F8FB;
+}
+
+.slick-slide > div{
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.inset-center {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.vartical-slider{
+  padding-top: 30%;
+}
+.vartical-slider .slick-next {
+  left: 42%;
+  top: -8%;
+  transform: rotate(270deg);
+}
+.vartical-slider .slick-prev {
+  left: 42%;
+  top: unset;
+  bottom: -31px;
+  transform: rotate(270deg);
+}
+
+.slick-prev:before, .slick-next:before {
+  color: #ec1f25 !important;
+}
+
+@media (max-width:640px) {
+  .select-size{
+    padding: 10px 24px;
+  }
+}
