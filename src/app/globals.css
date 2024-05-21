@@ -118,3 +118,20 @@ body {
     padding: 10px 24px;
   }
 }
+
+/*****UPDATED BY TARIQUL***/
+.bg-grey{
+background-color: #EFEFEF;
+}
+
+.bg-red{
+  background-color: #EC1E24;
+}
+
+.text-grey{
+  color:#565656;
+}
+.text-red{
+  color:#EC1E24;
+}
+/*****END OF UPDATE BY TARIQUL***/
