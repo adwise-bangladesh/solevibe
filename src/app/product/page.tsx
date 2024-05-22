@@ -183,7 +183,7 @@ const Checkout = () => {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={25}
+                                        size={18}
                                     />
                                 </div>
                                 <div className="col-span-2 md:col-span-5"> 
