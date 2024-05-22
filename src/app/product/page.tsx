@@ -173,24 +173,6 @@ const Checkout = () => {
                         <h3 className="text-xl font-bold leading-6 mt-6 text-gray-900">
                             Elegance Medicated Loafer Shoes For Men SB-S544 | Executive
                         </h3>
-                        <div className="rating-data">
-                            <div className="grid grid-cols-3 py-2">
-                                <div className="col-span-1 md:col-span-2">
-                                <StarRating 
-                                        edit={false}
-                                        isHalf={true}
-                                        value={4.5} 
-                                        starCount={5}
-                                        starColor={'#ffb400'}
-                                        emptyStarColor={'#ccc'}
-                                        size={18}
-                                    />
-                                </div>
-                                <div className="col-span-2 md:col-span-5"> 
-                                    <p className="text-gray-900 text-md	 mt-[6px]">4.98/5.00 (175 customer Reviews)</p>
-                                </div>
-                            </div>
-                        </div>
                         <p className="font-bold text-lg text-red-600 pr-3">CODE: SB-S544</p>
                         <p className="discount text-lg font-bold text-red-600">
                             PRICE: <span className="text-black text-base line-through">TK 2,500</span> TK 1,798
