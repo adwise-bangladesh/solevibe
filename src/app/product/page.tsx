@@ -109,13 +109,7 @@ const Checkout = () => {
         <div className="min-h-svh">
             <Navbar />
             <div className="container lg:container xl:container 2xl:container mx-auto">
-                <div className="flex justify-center">
-                    <h3 className="font-bold leading-9 mx-auto text-gray-900">
-                        Please fill Up The Form To Complete The Order
-                    </h3>
-                </div>
-
-                <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">
+                <div className="my-20 mx-3">
 
                     <div className="block lg:hidden">
 
@@ -126,12 +120,12 @@ const Checkout = () => {
                             height={0}
                             // layout="fill"
                             objectFit="contain"
-                            style={{ width: '100%', height: '450px',  borderRadius: '5px' }}
+                            style={{ width: '100%', height: '100%',  borderRadius: '5px' }}
                             quality={100}
                         />
                         <div className="px-7 mt-3">
                             <Slider {...settings}>
-                                <div className="text-black bg-[#f2f2f2] rounded-lg" >
+                                <div className="rounded-lg" >
                                     <Image
                                         src={product}
                                         onClick={ () => setProductImg(product)}
@@ -139,10 +133,10 @@ const Checkout = () => {
                                         width={0}
                                         height={0}
                                         sizes="100vw"
-                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} // optional
                                     />
                                 </div>
-                                <div className="text-black bg-[green] rounded">
+                                <div className="rounded">
                                     <Image
                                         src={banner1}
                                         onClick={ () => setProductImg(banner1)}
@@ -150,10 +144,10 @@ const Checkout = () => {
                                         width={0}
                                         height={0}
                                         sizes="100vw"
-                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} // optional
                                     />
                                 </div>
-                                <div className="text-black bg-[red] rounded">
+                                <div className="rounded">
                                     <Image
                                         src={beltImg}
                                         onClick={ () => setProductImg(beltImg)}
@@ -161,39 +155,39 @@ const Checkout = () => {
                                         width={0}
                                         height={0}
                                         sizes="100vw"
-                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} // optional
                                     />
                                 </div>
-                                <div className="text-black bg-[blue] rounded-lg">
+                                <div className=" rounded-lg">
                                     <Image
                                         src={banner1}
                                         alt="product"
                                         width={0}
                                         height={0}
                                         sizes="100vw"
-                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} // optional
                                     />
                                 </div>
                             </Slider>
                         </div>
-                        <h3 className="font-bold leading-9 mt-6 text-gray-900">
+                        <h3 className="text-xl font-bold leading-6 mt-6 text-gray-900">
                             Elegance Medicated Loafer Shoes For Men SB-S544 | Executive
                         </h3>
                         <div className="rating-data">
-                            <div className="grid grid-cols-8 py-2">
-                                <div className="col-span-3 md:col-span-2">
-                                    <StarRating 
-                                        value={rating} 
-                                        onStarClick={(nextValue, prevValue, name) => 
-                                            handleStarClick(nextValue, prevValue, name)}
+                            <div className="grid grid-cols-3 py-2">
+                                <div className="col-span-1 md:col-span-2">
+                                <StarRating 
+                                        edit={false}
+                                        isHalf={true}
+                                        value={4.5} 
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={20}
+                                        size={25}
                                     />
                                 </div>
-                                <div className="col-span-8 md:col-span-5"> 
-                                    <p className="text-gray-900 mt-[6px]">4.98/5.00 (175 customer Reviews)</p>
+                                <div className="col-span-2 md:col-span-5"> 
+                                    <p className="text-gray-900 text-md	 mt-[6px]">4.98/5.00 (175 customer Reviews)</p>
                                 </div>
                             </div>
                         </div>
@@ -206,7 +200,7 @@ const Checkout = () => {
                                 Please Select your Shoe Size
                             </h3>
                         </div>
-                        <div className="flex flex-wrap justify-evenly bg-[#EC1E24] px-3 my-3 rounded">
+                        <div className="flex flex-wrap justify-evenly bg-[#EC1E24] my-4 py-2 rounded">
                             <span className="select-size">Size 39</span>
                             <span className="select-size">Size 40</span>
                             <span className="select-size">Size 41</span>
