@@ -109,7 +109,7 @@ const Checkout = () => {
         <div className="min-h-svh">
             <Navbar />
             <div className="container lg:container xl:container 2xl:container mx-auto">
-                <div className="my-20 mx-3">
+                <div className="my-10 mx-3">
 
                     <div className="block lg:hidden">
 
