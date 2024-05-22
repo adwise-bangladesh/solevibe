@@ -20,7 +20,8 @@ export default function ProductList() {
         <div className="min-h-svh">
             <Navbar />
             <div className="banner w-100">
-                <img src="../../../../images/banner1.svg" className="w-screen" alt="Flowbite Logo" />
+            <div className="h-96 w-full bg-cover bg-center bg-no-repeat	 bg-[url('https://shop.shajgoj.com/wp-content/uploads/2023/01/Web-banner-coupon-Free-delivery-Web.jpg')] lg:bg-[url('https://shop.shajgoj.com/wp-content/uploads/2023/01/Web-banner-coupon-Free-delivery-2.jpg')]"></div>
+
             </div>
             <div className="container mx-auto ">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 mt-6 mb-6">
@@ -39,7 +40,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={19}
+                                        size={25}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -70,7 +71,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={19}
+                                        size={25}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -102,7 +103,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={19}
+                                        size={25}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -133,7 +134,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={19}
+                                        size={25}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -164,7 +165,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={19}
+                                        size={25}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -195,7 +196,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={19}
+                                        size={25}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
