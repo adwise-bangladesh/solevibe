@@ -174,9 +174,11 @@ const Checkout = () => {
                             Elegance Medicated Loafer Shoes For Men SB-S544 | Executive
                         </h3>
                         <p className="font-bold text-lg text-red-600 pr-3">CODE: SB-S544</p>
-                        <p className="discount text-lg font-bold text-red-600">
-                            PRICE: <span className="text-black text-base line-through">TK 2,500</span> TK 1,798
-                        </p>
+                        <div className="pricing flex justify-center mb-3">
+                                    <p className="font-bold text-lg text-red-600 pr-3">PRICE:</p>
+                                    <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">TK 2,000</p>
+                                    <p className="discount text-lg font-bold text-red">TK 1,798</p>
+                                </div>
                         <div className="flex justify-center mt-3">
                             <h3 className="leading-9 mx-auto text-lg text-[#EC1E24]">
                                 Please Select your Shoe Size
