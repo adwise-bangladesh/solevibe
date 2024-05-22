@@ -40,7 +40,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={20}
+                                        size={18}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -71,7 +71,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={20}
+                                        size={18}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -103,7 +103,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={20}
+                                        size={18}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -134,7 +134,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={20}
+                                        size={18}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -165,7 +165,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={20}
+                                        size={18}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
@@ -196,7 +196,7 @@ export default function ProductList() {
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
-                                        size={20}
+                                        size={18}
                                     />
                                 </div>
                                 <div className="pricing flex justify-center mb-3">
