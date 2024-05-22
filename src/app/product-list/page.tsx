@@ -25,7 +25,7 @@ export default function ProductList() {
             </div>
             <div className="container mx-auto ">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 mt-6 mb-6">
-                    <div className="relative max-w-sm m-3 bg-grey products">
+                    <div className="relative max-w-sm m-3 bg-grey products rounded">
                         <a href="/product">
                             <img src="../../../../images/belt.png" className="w-screen" alt="Flowbite Logo" />
                             <div className="p-1">
@@ -56,7 +56,7 @@ export default function ProductList() {
                             </button>
                         </a>
                     </div>
-                    <div className="relative max-w-sm m-3 bg-grey products">
+                    <div className="relative max-w-sm m-3 bg-grey products rounded">
                         <a href="/product">
                             <img src="../../../../images/shoes.png" className="w-screen" alt="Flowbite Logo" />
                             <div className="p-1">
@@ -88,7 +88,7 @@ export default function ProductList() {
                         </a>
                     </div>
 
-                    <div className="relative max-w-sm m-3 bg-grey products">
+                    <div className="relative max-w-sm m-3 bg-grey products rounded">
                         <a href="/product">
                             <img src="../../../../images/shoes.png" className="w-screen" alt="Flowbite Logo" />
                             <div className="p-1">
@@ -119,7 +119,7 @@ export default function ProductList() {
                             </button>
                         </a>
                     </div>
-                    <div className="relative max-w-sm m-3 bg-grey products">
+                    <div className="relative max-w-sm m-3 bg-grey products rounded">
                         <a href="/product">
                             <img src="../../../../images/belt.png" className="w-screen" alt="Flowbite Logo" />
                             <div className="p-1">
@@ -150,7 +150,7 @@ export default function ProductList() {
                             </button>
                         </a>
                     </div>
-                    <div className="relative max-w-sm m-3 bg-grey products">
+                    <div className="relative max-w-sm m-3 bg-grey products rounded">
                         <a href="/product">
                             <img src="../../../../images/belt.png" className="w-screen" alt="Flowbite Logo" />
                             <div className="p-1">
@@ -181,7 +181,7 @@ export default function ProductList() {
                             </button>
                         </a>
                     </div>
-                    <div className="relative max-w-sm m-3 bg-grey products">
+                    <div className="relative max-w-sm m-3 bg-grey products rounded">
                         <a href="/product">
                             <img src="../../../../images/belt.png" className="w-screen" alt="Flowbite Logo" />
                             <div className="p-1">
