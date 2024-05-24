@@ -1,6 +1,5 @@
 'use client'
 
-import Navbar from "@/components/navbar/Navbar";
 import StarRating from "react-rating-stars-component";
 import { useState } from 'react';
 import Image from 'next/image'
@@ -11,7 +10,6 @@ import Slider from "react-slick";
 import beltImg from '@images/images/belt.png';
 import banner1 from '@images/images/banner1.svg';
 import footwareSize from '@images/images/footware-size.svg';
-import Footer from "@/components/footer/Footer";
 
 const Checkout = () => {
     const [rating, setRating] = useState(0);
@@ -107,12 +105,9 @@ const Checkout = () => {
     
     return (
         <div className="min-h-svh">
-            <Navbar />
             <div className="container lg:container xl:container 2xl:container mx-auto">
                 <div className="my-10 mx-3">
-
                     <div className="block lg:hidden">
-
                         <Image
                             src={productImg}
                             alt="product"
@@ -192,7 +187,7 @@ const Checkout = () => {
                             <span className="select-size">Size 43</span>
                             <span className="select-size">Size 44</span>
                         </div>
-                        <a href="/checkout" className="block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 mb-3 rounded">
+                        <a href="/web/checkout" className="block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 mb-3 rounded">
                             ORDER NOW
                         </a>
                         <button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mb-3 rounded">
@@ -309,7 +304,7 @@ const Checkout = () => {
                                     <span className="select-size">Size 43</span>
                                     <span className="select-size">Size 44</span>
                                 </div>
-                                <a href="/checkout" className="block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 mb-3 rounded">
+                                <a href="/web/checkout" className="block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 mb-3 rounded">
                                     ORDER NOW
                                 </a>
                                 <button className="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 mb-3 rounded">
@@ -346,7 +341,6 @@ const Checkout = () => {
                 </div>
 
             </div>
-            <Footer />
         </div>
     )
 }

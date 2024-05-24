@@ -1,8 +1,8 @@
 "use client"
 
 import Button from "@/components/button/Button";
-import { decrement, increment } from "@/lib/features/counter/counterSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/redux/hooks";
+import { decrement, increment } from "@/service/features/counter/counterSlice";
+import { useAppDispatch, useAppSelector } from "@/service/redux/hooks";
 
 const HomePage = () => {
 

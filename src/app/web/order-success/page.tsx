@@ -4,8 +4,6 @@ import { useState } from 'react';
 import Image from 'next/image'
 import thankyou from '@images/icons/thankyou.svg'
 import imgSrc from '@images/images/payment-method.svg'
-import Navbar from '@/components/navbar/Navbar';
-import Footer from '@/components/footer/Footer';
 
 const OrderSuccess = () => {
     const [rating, setRating] = useState(0);
@@ -28,7 +26,6 @@ const OrderSuccess = () => {
     };
     return (
         <div className="min-h-svh">
-            <Navbar />
             <div className="container mx-auto">
                 <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">  
                     <div className="flex flex-col items-center">
@@ -73,7 +70,6 @@ const OrderSuccess = () => {
                 </div>
 
             </div>
-            <Footer />
         </div>
     )
 }

@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react';
-import Navbar from "@/components/navbar/Navbar";
-import Footer from "@/components/footer/Footer";
 
 const Checkout = () => {
     const [rating, setRating] = useState(0);
@@ -25,7 +23,6 @@ const Checkout = () => {
     };
     return (
         <div className="min-h-svh">
-            <Navbar />
             <div className="container mx-auto">
                 <div className="flex justify-center">
                     <h3 className="font-bold leading-9 mx-auto text-gray-900">
@@ -98,11 +95,8 @@ const Checkout = () => {
                                 </div>
                             </div>
                         </div>
-
-                        
-
                         <div>
-                            <a href="/order-success"
+                            <a href="/web/order-success"
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-[#EC1E24] px-3 py-1.5 
                                 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-700
@@ -192,7 +186,6 @@ const Checkout = () => {
                 </div>
 
             </div>
-            <Footer />
         </div>
     )
 }
