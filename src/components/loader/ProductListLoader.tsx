@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
@@ -26,7 +28,7 @@ interface ProductListLoaderComponent extends React.FC<ProductListLoaderProps> {
 }
 
 const ProductListLoader: ProductListLoaderComponent = ({
-  width = window.innerWidth,
+  width = typeof window !== "undefined" ? window?.innerWidth : 1200,
   heading = { width: 140, height: 24 },
   row = 2,
   column = 5,

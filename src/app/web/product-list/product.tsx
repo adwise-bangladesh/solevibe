@@ -29,8 +29,16 @@ const Product = ({product, key}) => {
                             />
                         </div>
                         <div className="pricing flex justify-center mb-3">
-                            <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">TK 2,000</p>
-                            <p className="discount text-lg font-bold text-red">TK 1,798</p>
+                            {
+                                product?.sale_price ? (
+                                    <>
+                                        <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">TK {product?.regular_price}</p>
+                                        <p className="discount text-lg font-bold text-red">TK {product?.sale_price}</p>
+                                    </>
+                                ):(
+                                    <p className="discount text-lg font-bold text-red">TK {product?.price}</p>
+                                )
+                            }
                         </div>
                     </div>
                     <button className="uppercase py-2 text-sm 
