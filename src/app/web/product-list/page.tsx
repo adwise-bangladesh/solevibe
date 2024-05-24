@@ -11,7 +11,7 @@ import ProductListLoader from "@/components/loader/ProductListLoader";
 const ProductList = () => {
     const router = useRouter();
     const {data, isLoading } = useGetAllProductsQuery({});
-    console.log( window.innerWidth);
+    // console.log( window?.innerWidth);
     // console.log(isLoading);
 
     // const linkTo = () => {
