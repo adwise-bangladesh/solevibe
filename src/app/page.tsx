@@ -1,4 +1,4 @@
-import ProductList from "./web/product-list/page";
+import ProductList from "./(web)/product-list/page";
 
 
 export default function Home() {
