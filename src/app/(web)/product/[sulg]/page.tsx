@@ -144,39 +144,6 @@ const SingleProduct = () => {
                                         )
                                     })
                                 }
-                                
-                                {/* <div className="rounded">
-                                    <Image
-                                        src={banner1}
-                                        onClick={ () => setProductImg(banner1)}
-                                        alt="product"
-                                        width={0}
-                                        height={0}
-                                        sizes="100vw"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                    />
-                                </div>
-                                <div className="rounded">
-                                    <Image
-                                        src={beltImg}
-                                        onClick={ () => setProductImg(beltImg)}
-                                        alt="product"
-                                        width={0}
-                                        height={0}
-                                        sizes="100vw"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                    />
-                                </div>
-                                <div className=" rounded-lg">
-                                    <Image
-                                        src={banner1}
-                                        alt="product"
-                                        width={0}
-                                        height={0}
-                                        sizes="100vw"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                    />
-                                </div> */}
                             </Slider>
                         </div>
                         <h3 className="text-xl font-bold leading-6 mt-6 text-gray-900">
@@ -221,49 +188,23 @@ const SingleProduct = () => {
                                     <div className="col-span-1">
                                         <div className="vartical-slider">
                                             <Slider {...settingsNext}>
-                                                <div className="text-black bg-[#f2f2f2] rounded-lg" >
-                                                    <Image
-                                                        src={product}
-                                                        onClick={ () => setProductImg(product)}
-                                                        alt="img1"
-                                                        width={0}
-                                                        height={0}
-                                                        sizes="100vw"
-                                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                                    />
-                                                </div>
-                                                <div className="text-black bg-[green] rounded">
-                                                    <Image
-                                                        src={banner1}
-                                                        onClick={ () => setProductImg(banner1)}
-                                                        alt="product"
-                                                        width={0}
-                                                        height={0}
-                                                        sizes="100vw"
-                                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                                    />
-                                                </div>
-                                                <div className="text-black bg-[red] rounded">
-                                                    <Image
-                                                        src={beltImg}
-                                                        onClick={ () => setProductImg(beltImg)}
-                                                        alt="product"
-                                                        width={0}
-                                                        height={0}
-                                                        sizes="100vw"
-                                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                                    />
-                                                </div>
-                                                <div className="text-black bg-[blue] rounded-lg">
-                                                    <Image
-                                                        src={banner1}
-                                                        alt="product"
-                                                        width={0}
-                                                        height={0}
-                                                        sizes="100vw"
-                                                        style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                                    />
-                                                </div>
+                                            {
+                                                data?.images?.map((image)=>{
+                                                    return(
+                                                        <div className="text-black bg-[green] rounded">
+                                                            <Image
+                                                                src={image?.src}
+                                                                onClick={ () => setProductImg(image?.src)}
+                                                                alt="product"
+                                                                width={0}
+                                                                height={0}
+                                                                sizes="100vw"
+                                                                style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
+                                                            />
+                                                        </div>
+                                                    )
+                                                })
+                                            }
                                             </Slider>
                                         </div>
                                     </div>
