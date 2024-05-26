@@ -39,6 +39,10 @@ body {
     background-color: #000;
     color: #ffff;
   }
+  .select-size.active{
+    background-color: #000;
+    color: #ffff;
+  }
 }
 
 /* IncrementDecrementBtn.css */

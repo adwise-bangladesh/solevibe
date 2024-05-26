@@ -9,37 +9,34 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import beltImg from '@images/images/belt.png';
 import banner1 from '@images/images/banner1.svg';
+import preImage from '@images/images/no-image.png';
 import footwareSize from '@images/images/footware-size.svg';
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { idDecryption } from "@/service/helpers/DataHelper";
 import { useGetSingleProductQuery } from "@/service/features/products/ProductsApi";
 
 const SingleProduct = () => {
     const searchParams = useSearchParams()
-    const id = idDecryption(Number(searchParams.get('product')))
+    const tmpCode = Number(searchParams.get('product'))
+    const id = idDecryption(tmpCode)
     const {data, isLoading} = useGetSingleProductQuery(id)
-    const [productImg, setProductImg] = useState(data?.images[0]?.src);
+    const [productImg, setProductImg] = useState('');
     useEffect(() => {
         setProductImg(()=>data?.images[0]?.src)
     },[isLoading]);
     const [rating, setRating] = useState(0);
+    const [size, setSize] = useState('');
+    const [error, setError] = useState('');
+    const router = useRouter();
+    const orderNow = () => {
+        if(size)
+            router.push(`/checkout/${tmpCode}?size=${size}`)
+        else setError('Please Select your Shoe Size')
+    }
+
     const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
         setRating(nextValue);
     }
-    let minValue = 0, maxValue = 100
-    const [count, setCount] = useState(minValue);
-
-    const handleIncrementCounter = () => {
-        if (count < maxValue) {
-        setCount((prevState) => prevState + 1);
-        }
-    };
-
-    const handleDecrementCounter = () => {
-        if (count > minValue) {
-        setCount((prevState) => prevState - 1);
-        }
-    };
 
     function SampleNextArrow(props:any) {
         const { className, style, onClick } = props;
@@ -109,14 +106,13 @@ const SingleProduct = () => {
         prevArrow: <SamplePrevArrow />,
     };
 
-    
     return (
         <div className="min-h-svh">
             <div className="container lg:container xl:container 2xl:container mx-auto">
                 <div className="my-10 mx-3">
                     <div className="block lg:hidden">
                         <Image
-                            src={productImg}
+                            src={productImg ? productImg : preImage}
                             alt="product"
                             width={0}
                             height={0}
@@ -128,6 +124,17 @@ const SingleProduct = () => {
                         <div className="px-7 mt-3">
                             <Slider {...settings}>
                                 {
+                                    isLoading ? 
+                                    <div className="rounded" >
+                                        <Image
+                                            src={preImage}
+                                            alt="product"
+                                            width={0}
+                                            height={0}
+                                            sizes="100vw"
+                                            style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
+                                        /> 
+                                    </div> :
                                     data?.images?.map((image)=>{
                                         return(
                                             <div className="rounded" >
@@ -150,12 +157,38 @@ const SingleProduct = () => {
                             {/* Elegance Medicated Loafer Shoes For Men SB-S544 | Executive */}
                             {data?.name}
                         </h3>
+                        <div className="rating-data">
+                            <div className="grid grid-cols-8 py-2">
+                                <div className="col-span-3 md:col-span-2">
+                                    <StarRating 
+                                        value={data?.average_rating} 
+                                        onStarClick={(nextValue, prevValue, name) => 
+                                            handleStarClick(nextValue, prevValue, name)}
+                                        starCount={5}
+                                        starColor={'#ffb400'}
+                                        emptyStarColor={'#ccc'}
+                                        size={20}
+                                    />
+                                </div>
+                                <div className="col-span-8 md:col-span-5"> 
+                                    <p className="text-gray-900 mt-[6px]">{data?.average_rating}/5.00 ({data?.rating_count} customer Reviews)</p>
+                                </div>
+                            </div>
+                        </div>
                         <p className="font-bold text-lg text-red-600 pr-3">CODE: {data?.sku}</p>
                         <div className="pricing flex justify-center mb-3">
-                                    <p className="font-bold text-lg text-red-600 pr-3">PRICE:</p>
-                                    <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">TK 2,000</p>
-                                    <p className="discount text-lg font-bold text-red">TK 1,798</p>
-                                </div>
+                            <p className="font-bold text-lg text-red-600 pr-3">PRICE:</p>
+                            {
+                                data?.sale_price ? (
+                                    <>
+                                        <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">
+                                            TK {data?.regular_price}
+                                        </p>
+                                        <p className="discount text-lg font-bold text-red">TK {data?.sale_price}</p>
+                                    </>
+                                ):(<p className="discount text-lg font-bold text-red">TK {data?.price}</p>)
+                            }
+                        </div>
                         <div className="flex justify-center mt-3">
                             <h3 className="leading-9 mx-auto text-lg text-[#EC1E24]">
                                 Please Select your Shoe Size
@@ -164,13 +197,20 @@ const SingleProduct = () => {
                         <div className="flex flex-wrap justify-evenly bg-[#EC1E24] my-4 py-2 rounded">
                             {
                                 data?.attributes[0]?.options.map(
-                                    (option)=> <span className="select-size">{option}</span>
+                                    (option) => <span 
+                                        className={`select-size ${option == size ? 'active' : ''} `} 
+                                        onClick={()=> {setSize(option == size ? '' : option); setError('')}}
+                                    >{option}</span>
                                 )
                             }
                         </div>
-                        <a href="/web/checkout" className="block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 mb-3 rounded">
+                        {
+
+                        }
+                        <a onClick={orderNow} className={`block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
                             ORDER NOW
                         </a>
+                        { error ? <p className="text-rose-900 mb-2">{error}</p> : ''}
                         <button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mb-3 rounded">
                             ADD TO CART
                         </button>
@@ -181,6 +221,7 @@ const SingleProduct = () => {
                             Call Now: 01926644575
                         </button>
                     </div>
+                    {/* For large screen */}
                     <div className="hidden lg:block">
                         <div className="grid grid-cols-4 gap-4">
                             <div className="col-span-2">
@@ -189,6 +230,15 @@ const SingleProduct = () => {
                                         <div className="vartical-slider">
                                             <Slider {...settingsNext}>
                                             {
+                                                isLoading ? 
+                                                <Image
+                                                    src={preImage}
+                                                    alt="product"
+                                                    width={0}
+                                                    height={0}
+                                                    sizes="100vw"
+                                                    style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
+                                                /> :
                                                 data?.images?.map((image)=>{
                                                     return(
                                                         <div className="text-black bg-[green] rounded">
@@ -210,7 +260,7 @@ const SingleProduct = () => {
                                     </div>
                                     <div className="col-span-3" style={{paddingTop: '4%'}}>
                                         <Image
-                                            src={productImg}
+                                            src={productImg ? productImg : preImage}
                                             alt="product"
                                             width={0}
                                             height={0}
@@ -222,13 +272,13 @@ const SingleProduct = () => {
                             </div>
                             <div className="col-span-2">
                                 <h3 className="font-bold leading-9 mt-6 text-gray-900">
-                                    Elegance Medicated Loafer Shoes For Men SB-S544 | Executive
+                                    {data?.name}
                                 </h3>
                                 <div className="rating-data">
                                     <div className="grid grid-cols-8 py-2">
                                         <div className="col-span-3 md:col-span-2">
                                             <StarRating 
-                                                value={rating} 
+                                                value={data?.average_rating} 
                                                 onStarClick={(nextValue, prevValue, name) => 
                                                     handleStarClick(nextValue, prevValue, name)}
                                                 starCount={5}
@@ -238,13 +288,20 @@ const SingleProduct = () => {
                                             />
                                         </div>
                                         <div className="col-span-8 md:col-span-5"> 
-                                            <p className="text-gray-900 mt-[6px]">4.98/5.00 (175 customer Reviews)</p>
+                                        <p className="text-gray-900 mt-[6px]">{data?.average_rating}/5.00 ({data?.rating_count} customer Reviews)</p>
                                         </div>
                                     </div>
                                 </div>
                                 <p className="font-bold text-lg text-red-600 pr-3">CODE: SB-S544</p>
                                 <p className="discount text-lg font-bold text-red-600">
-                                    PRICE: <span className="text-black text-base line-through">TK 2,500</span> TK 1,798
+                                    PRICE: 
+                                    {
+                                        data?.sale_price ? (
+                                            <>
+                                                <span className="text-black text-base line-through">TK {data?.regular_price}</span> {data?.sale_price}
+                                            </>
+                                        ):(<>TK {data?.price}</>)
+                                    }
                                 </p>
                                 <div className="flex justify-center mt-3">
                                     <h3 className="leading-9 mx-auto text-lg text-[#EC1E24]">
@@ -252,16 +309,19 @@ const SingleProduct = () => {
                                     </h3>
                                 </div>
                                 <div className="flex flex-wrap justify-evenly bg-[#EC1E24] px-3 my-3 rounded">
-                                    <span className="select-size">Size 39</span>
-                                    <span className="select-size">Size 40</span>
-                                    <span className="select-size">Size 41</span>
-                                    <span className="select-size">Size 42</span>
-                                    <span className="select-size">Size 43</span>
-                                    <span className="select-size">Size 44</span>
+                                {
+                                    data?.attributes[0]?.options.map(
+                                        (option) => <span 
+                                            className={`select-size ${option == size ? 'active' : ''} `} 
+                                            onClick={()=> {setSize(option == size ? '' : option); setError('')}}
+                                        >{option}</span>
+                                    )
+                                }
                                 </div>
-                                <a href="/web/checkout" className="block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 mb-3 rounded">
+                                <a onClick={orderNow} className={`block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
                                     ORDER NOW
                                 </a>
+                                { error ? <p className="text-rose-900 mb-2">{error}</p> : ''}
                                 <button className="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 mb-3 rounded">
                                     ADD TO CART
                                 </button>
