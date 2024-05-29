@@ -1,6 +1,9 @@
 'use client'
 
+import { addToCart, removeFromCart } from '@/service/features/cartSlice';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import deleteImg from '@images/icons/delete.svg'
 
 const Checkout = () => {
     const [rating, setRating] = useState(0);
@@ -21,6 +24,43 @@ const Checkout = () => {
         setCount((prevState) => prevState - 1);
         }
     };
+    // ____________________
+    
+    const dispatch = useDispatch()
+
+    const { cartItems } = useSelector((state:any) => state.cart)
+    const [qty, setQty] = useState(1)
+
+    console.log('cartItems', cartItems)
+  
+    // const addToCartHandler = () => {
+    //   let newQty = qty
+    //     const existItem = cartItems.find((x) => x.id === data.id)
+    //     if (existItem) {
+    //         newQty = existItem.qty + 1
+    //     }
+
+    //     const product = {
+    //         id: data?.id,
+    //         name: data?.name,
+    //         price: data?.price,
+    //         image: data?.images[0]?.src
+    //     }
+    //   dispatch(addToCart({ ...product, qty: newQty }))
+  
+    // }
+
+
+    const removeFromCartHandler = (id) => {
+        dispatch(removeFromCart(id))
+      }
+    
+      const addToCartHandler = async (product, qty) => {
+        dispatch(addToCart({ ...product, qty }))
+      }
+
+
+
     return (
         <div className="min-h-svh">
             <div className="container mx-auto">
@@ -109,32 +149,39 @@ const Checkout = () => {
                     </form>
                 </div>
                 <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">
-                    <div className="grid grid-cols-7 gap-3 p-3 bg-[#fff] border border-gray-200 rounded-lg">
-                        <div className="bg-blue-100 col-span-2">
-                            <img src="../../../../images/belt.png" className="w-screen" alt="Flowbite Logo" />
-                        </div>
-                        <div className="col-span-5">
-                            <h5 className="text-black">Elegance Medicated Loafer Shoes For Men SB-S544 | Executive</h5>
-                            <span className="text-black">Size: 42</span>
-                            <div className="grid grid-cols-7 gap-3">
-                                <div className="col-span-5">
-                                    <p className="text-lg font-bold text-red-600">TK&nbsp;1,798</p>
+                    {
+                        cartItems?.map((product)=>
+                            <div className="grid grid-cols-7 gap-3 p-3 mb-3 bg-[#fff] border border-gray-200 rounded-lg">
+                                <div className="bg-blue-100 col-span-2">
+                                    <img src={product?.image} className="w-screen" alt="Flowbite Logo" />
                                 </div>
-                                <div className="col-span-2">
-                                    <div className="quantity-btn btn-group text-[#2f2d2df2]">
-                                        <button className="increment-btn" onClick={handleIncrementCounter}>
-                                            +
-                                        </button>
-                                        <p>{count}</p>
-                                        <button className="decrement-btn" onClick={handleDecrementCounter}>
-                                            -
-                                        </button>
+                                <div className="col-span-5">
+                                    <h5 className="text-black">{product?.name}</h5>
+                                    <span className="text-black">Size: { product?.size ? product?.size.replace(/\D/g, "") : 0 }</span>
+                                    <div className="grid grid-cols-9 gap-3">
+                                        <div className="col-span-5">
+                                            <p className="text-lg font-bold text-red-600">TK {product?.price}</p>
+                                        </div>
+                                        <div className="col-span-4">
+                                            <button className='text-rose-900' onClick={ () => removeFromCartHandler(product?.id)}>
+                                                <i className="fas fa-trash"></i>
+                                            </button>
+                                            <div className="quantity-btn btn-group text-[#2f2d2df2] float-right">
+                                                <button className="increment-btn" onClick={ () => addToCartHandler(product, product?.qty+1)}>
+                                                    +
+                                                </button>
+                                                <p>{product?.qty}</p>
+                                                <button className="decrement-btn" onClick={ () => addToCartHandler(product, product?.qty > 0 ? product?.qty-1 : 0)}>
+                                                    -
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="grid grid-cols-7 gap-3 p-3 bg-[#fff] border border-gray-200 rounded-lg">
+                        )
+                    }
+                    {/* <div className="grid grid-cols-7 gap-3 p-3 bg-[#fff] border border-gray-200 rounded-lg">
                         <div className="col-span-2">
                             <img src="../../../../images/belt.png" className="w-screen" alt="Flowbite Logo" />
                         </div>
@@ -158,7 +205,7 @@ const Checkout = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="flex justify-center">
                         <h3 className="font-bold leading-9 mx-auto text-gray-900">
                             Total Bill

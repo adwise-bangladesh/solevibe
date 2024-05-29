@@ -3,6 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 
+interface LinkProps {
+    rel: string;
+    href: string;
+    integrity?: string;
+    crossOrigin?: string;
+    referrerPolicy?: string;
+  }
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -15,10 +23,29 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+
+    const linkProps: LinkProps = {
+        rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+        integrity: 'sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==',
+        crossOrigin: 'anonymous',
+        referrerPolicy: 'no-referrer',
+    };
+
     return (
         <html lang="en">
             <head>
                 <link rel="icon" href="/icons/logo2.svg" type="image/x-icon"/>
+                {/* <link
+                    rel="stylesheet"
+                    type="text/css"
+                    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+                /> */}
+                {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="  /> */}
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+                {/* <link {...linkProps} /> */}
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" integrity="sha512-Tn2m0TIpgVyTzzvmxLNuqbSJH3JP8jm+Cy3hvHrW7ndTDcJ1w5mBiksqDBb8GpE2ksktFvDB/ykZ0mDpsZj20w==" crossOrigin="anonymous" referrerPolicy="no-referrer"></script>
             </head>
             <body className={inter.className}>
                 <StoreProvider>

@@ -14,6 +14,8 @@ import footwareSize from '@images/images/footware-size.svg';
 import { useRouter, useSearchParams } from 'next/navigation'
 import { idDecryption } from "@/service/helpers/DataHelper";
 import { useGetSingleProductQuery } from "@/service/features/products/ProductsApi";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "@/service/features/cartSlice";
 
 const SingleProduct = () => {
     const searchParams = useSearchParams()
@@ -28,15 +30,48 @@ const SingleProduct = () => {
     const [size, setSize] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
+
+    const dispatch = useDispatch()
+
+    const { cartItems } = useSelector((state:any) => state.cart)
+    const [qty, setQty] = useState(1)
+  
+    const addToCartHandler = () => {
+      let newQty = qty
+    //   if (increasePerClick) {
+        const existItem = cartItems.find((x) => x.id === data.id)
+        if (existItem) {
+        //   if (existItem.qty + 1 <= product.countInStock) {
+            newQty = existItem.qty + 1
+        //   } else {
+        //     return alert('No more product exist')
+        //   }
+        }
+    //   }
+
+        const product = {
+            id: data?.id,
+            name: data?.name,
+            size: size,
+            price: data?.price,
+            image: data?.images[0]?.src
+        }
+      dispatch(addToCart({ ...product, qty: newQty }))
+    }
+
     const orderNow = () => {
-        if(size)
-            router.push(`/checkout/${tmpCode}?size=${size}`)
+        if(size){
+            addToCartHandler();
+            setTimeout(
+                ()=>router.push(`/checkout/${tmpCode}?size=${size}`), 500
+            )
+        }
         else setError('Please Select your Shoe Size')
     }
 
-    const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
-        setRating(nextValue);
-    }
+    // const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
+    //     setRating(nextValue);
+    // }
 
     function SampleNextArrow(props:any) {
         const { className, style, onClick } = props;
@@ -162,8 +197,8 @@ const SingleProduct = () => {
                                 <div className="col-span-3 md:col-span-2">
                                     <StarRating 
                                         value={data?.average_rating} 
-                                        onStarClick={(nextValue, prevValue, name) => 
-                                            handleStarClick(nextValue, prevValue, name)}
+                                        // onStarClick={(nextValue, prevValue, name) => 
+                                        //     handleStarClick(nextValue, prevValue, name)}
                                         starCount={5}
                                         starColor={'#ffb400'}
                                         emptyStarColor={'#ccc'}
@@ -279,8 +314,8 @@ const SingleProduct = () => {
                                         <div className="col-span-3 md:col-span-2">
                                             <StarRating 
                                                 value={data?.average_rating} 
-                                                onStarClick={(nextValue, prevValue, name) => 
-                                                    handleStarClick(nextValue, prevValue, name)}
+                                                // onStarClick={(nextValue, prevValue, name) => 
+                                                //     handleStarClick(nextValue, prevValue, name)}
                                                 starCount={5}
                                                 starColor={'#ffb400'}
                                                 emptyStarColor={'#ccc'}
