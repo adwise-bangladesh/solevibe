@@ -1,4 +1,4 @@
-'use client'
+
 
 import Navbar from "@/components/navbar/Navbar";
 
@@ -7,11 +7,14 @@ import Product from "./product";
 import { BulletList } from 'react-content-loader'
 import Footer from "@/components/footer/Footer";
 import ProductListLoader from "@/components/loader/ProductListLoader";
+import { getProducts, setProducts } from "../../../service/features/data-service";
+
+
 
 const ProductList = () => {
-    const {data, isLoading } = useGetAllProductsQuery({});
-    // console.log( window?.innerWidth);
-    // console.log(isLoading);
+    // const {data, isLoading } = useGetAllProductsQuery({});
+
+    const data = getProducts()
     return (
         <div className="min-h-svh">
             <Navbar />
@@ -23,13 +26,14 @@ const ProductList = () => {
                 ></div>
             </div>
             <div className="container mx-auto ">
-                {isLoading ? <div className="overflow-hidden"><ProductListLoader /></div> : ''}
+                {/* {isLoading ? <div className="overflow-hidden"><ProductListLoader /></div> : ''} */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 mt-6 mb-6">
                     {
-                        data ? data?.map((product)=> <Product product={product} key={product?.id} />) 
+                        data ? data?.map((product)=> {
+                            if (product.status == "publish") return <Product product={product} key={product?.id} />
+                        })
                         : <p>No data found</p>
                     }
-                    {/* <Product product={''} key={''} /> */}
                 </div>
             </div>
             <Footer />

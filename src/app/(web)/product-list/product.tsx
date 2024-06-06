@@ -1,13 +1,17 @@
+'use client'
+
 import { useState } from 'react';
 import StarRating from "react-rating-stars-component";
 import Link from 'next/link'
 import { idEncryption } from '@/service/helpers/DataHelper';
+import Image from 'next/image'
 
 const Product = ({product, key}) => {
     const [rating, setRating] = useState(0);
     // const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
     //     setRating(nextValue);
     // }
+    console.log('product', product)
     const id = product?.id
     const productId = idEncryption(id)
 
@@ -15,7 +19,16 @@ const Product = ({product, key}) => {
         <>
             <div className="relative max-w-sm m-3 bg-grey products rounded" id={productId}>
                 <div>
-                    <img src={product?.images[0]?.src} className="w-screen" alt="Flowbite Logo" />
+                    {/* <img src={product?.images[0]?.src} className="w-screen" alt="Flowbite Logo" /> */}
+                    <Image 
+                        src={product?.images[0]?.src} 
+                        alt='product-image' 
+                        width={0}
+                        height={0}
+                        objectFit="contain"
+                        style={{ width: '100%', height: '100%',  borderRadius: '5px' }}
+                        quality={100}
+                    ></Image>
                     <div className="p-1">
                             <Link href={`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`} >
                                 <h5 className="text-center text-sm font-bold tracking-tight text-gray-900 text-black">
