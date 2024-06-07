@@ -6,8 +6,14 @@ interface CartItem {
   name: string;
   size: any;
   qty: number;
+  sku: any;
   price: number;
   image: string;
+}
+
+interface removeItem {
+  id: any;
+  size: any;
 }
 
 interface ShippingAddress {
@@ -26,6 +32,7 @@ interface CartState {
   shippingPrice?: string;
   taxPrice?: string;
   totalPrice?: string;
+  
 }
 
 const initialState: CartState = Cookies.get('cart')
@@ -35,6 +42,7 @@ const initialState: CartState = Cookies.get('cart')
       cartItems: [],
       shippingAddress: {} as ShippingAddress,
       paymentMethod: '',
+      itemsPrice: 0
     };
 
 const addDecimals = (num: number): string => {
@@ -46,19 +54,19 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      console.log('cart state:', state)
+      // console.log('cart state:', state)
       const item = action.payload;
-      const existItem = state.cartItems.find((x) => x.id === item.id);
+      const existItem = state.cartItems.find((x) => x?.id === item?.id && x?.size == item?.size);
       if (existItem) {
-        state.cartItems = state.cartItems.map((x) =>
-          x.id === existItem.id ? item : x
+        state.cartItems = state?.cartItems?.map((x) =>
+          (x.id === existItem.id && x?.size == existItem?.size) ? item : x // check item existance
         );
       } else {
         state.cartItems = [...state.cartItems, item];
       }
-      // state.itemsPrice = addDecimals(
-      //   state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
-      // );
+      state.itemsPrice = addDecimals(
+        state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+      );
       // state.shippingPrice = addDecimals(state.itemsPrice > 100 ? 0 : 100);
       // state.taxPrice = addDecimals(Number(0.15 * state.itemsPrice));
       // state.totalPrice = addDecimals(
@@ -68,10 +76,15 @@ const cartSlice = createSlice({
       // );
       
       Cookies.set('cart', JSON.stringify(state));
-      console.log('cart:', Cookies.get('cart'))
+      // console.log('cart:', Cookies.get('cart'))
     },
-    removeFromCart: (state, action: PayloadAction<string>) => {
-      state.cartItems = state.cartItems.filter((x) => x.id !== action.payload);
+
+    removeFromCart: (state, action: PayloadAction<removeItem>) => {
+      console.log('PayloadAction', action.payload)
+      state.cartItems = state.cartItems.filter((x) => {
+        console.log('item-x', x.id, x.size)
+        return (x.id == action.payload.id && x.size == action.payload.size) ? false : true
+      });
       state.itemsPrice = addDecimals(
         state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
       );
@@ -84,6 +97,7 @@ const cartSlice = createSlice({
       );
       Cookies.set('cart', JSON.stringify(state));
     },
+
     saveShippingAddress: (state, action: PayloadAction<ShippingAddress>) => {
       state.shippingAddress = action.payload;
       Cookies.set('cart', JSON.stringify(state));

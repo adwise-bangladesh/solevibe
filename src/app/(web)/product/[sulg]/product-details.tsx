@@ -24,8 +24,10 @@ const ProductDetails = ({data, code}) => {
     const [qty, setQty] = useState(1)
     const addToCartHandler = () => {
       let newQty = qty
+      console.log('qty', qty)
     //   if (increasePerClick) {
-        const existItem = cartItems.find((x) => x.id === data.id)
+        const existItem = cartItems.find((x) => x.id === data.id && x.size == size)
+        console.log('existItem', existItem)
         if (existItem) {
         //   if (existItem.qty + 1 <= product.countInStock) {
             newQty = existItem.qty + 1
@@ -39,6 +41,7 @@ const ProductDetails = ({data, code}) => {
             id: data?.id,
             name: data?.name,
             size: size,
+            sku: data?.sku,
             price: data?.price,
             image: data?.images[0]?.src
         }
@@ -49,7 +52,7 @@ const ProductDetails = ({data, code}) => {
         if(size){
             addToCartHandler();
             setTimeout(
-                ()=>router.push(`/checkout/${code}?size=${size}`), 500
+                ()=>router.push(`/checkout`), 500
             )
         }
         else setError('Please Select your Shoe Size')
@@ -149,9 +152,9 @@ const ProductDetails = ({data, code}) => {
                         //         style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
                         //     /> 
                         // </div> :
-                        data?.images?.map((image)=>{
+                        data?.images?.map((image, idx)=>{
                             return(
-                                <div className="rounded" >
+                                <div className="rounded" key={idx}>
                                     <Image
                                         src={image?.src}
                                         onClick={ () => setProductImg(image?.src)}
@@ -211,7 +214,7 @@ const ProductDetails = ({data, code}) => {
             <div className="flex flex-wrap justify-evenly bg-[#EC1E24] my-4 py-2 rounded">
                 {
                     data?.attributes[0]?.options.map(
-                        (option) => <span 
+                        (option, idx) => <span key={idx}
                             className={`select-size ${option == size ? 'active' : ''} `} 
                             onClick={()=> {setSize(option == size ? '' : option); setError('')}}
                         >{option}</span>
@@ -253,9 +256,9 @@ const ProductDetails = ({data, code}) => {
                                     //     sizes="100vw"
                                     //     style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
                                     // /> :
-                                    data?.images?.map((image)=>{
+                                    data?.images?.map((image, idx)=>{
                                         return(
-                                            <div className="text-black bg-[green] rounded">
+                                            <div className="text-black bg-[green] rounded" key={1+idx}>
                                                 <Image
                                                     src={image?.src}
                                                     onClick={ () => setProductImg(image?.src)}
@@ -325,7 +328,7 @@ const ProductDetails = ({data, code}) => {
                     <div className="flex flex-wrap justify-evenly bg-[#EC1E24] px-3 my-3 rounded">
                     {
                         data?.attributes[0]?.options.map(
-                            (option) => <span 
+                            (option, idx) => <span key={11+idx}
                                 className={`select-size ${option == size ? 'active' : ''} `} 
                                 onClick={()=> {setSize(option == size ? '' : option); setError('')}}
                             >{option}</span>
