@@ -16,9 +16,11 @@ import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import { SnackbarContent } from "@mui/material";
 import { ClassNames } from "@emotion/react";
+import Cookies from 'js-cookie';
 
 const ProductDetails = ({data, code}) => {
-    console.log('single product:', data)
+    // console.log('single product:', data)
+    console.log('product_solo:', Cookies.get('product_solo'))
     const [productImg, setProductImg] = useState(data?.images[0]?.src);
     const [size, setSize] = useState('');
     const [error, setError] = useState('');
@@ -61,10 +63,7 @@ const ProductDetails = ({data, code}) => {
             )
         }
         else {
-            if(!open){
-                handleClick()
-            }
-            console.log('clickedxs')
+            handleClick()
             setError('Please Select your Shoe Size')
         }
     }

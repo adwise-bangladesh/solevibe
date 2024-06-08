@@ -5,15 +5,36 @@ import StarRating from "react-rating-stars-component";
 import Link from 'next/link'
 import { idEncryption } from '@/service/helpers/DataHelper';
 import Image from 'next/image'
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 const Product = ({product, key}) => {
     const [rating, setRating] = useState(0);
+    const router = useRouter();
     // const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
     //     setRating(nextValue);
     // }
     console.log('product', product)
     const id = product?.id
     const productId = idEncryption(id)
+
+    const temp = {
+        id: product?.id,
+        name: product?.name,
+        attributes: product?.attributes,
+        qty: product?.id,
+        sku: product?.sku,
+        price: product?.price,
+        image: product?.id,
+      }
+    const orderNow = () => {
+        // Cookies.delete('product_solo')
+        Cookies.set('product_solo', JSON.stringify(temp));
+        // console.log('product_solo:', Cookies.get('product_solo'))
+        setTimeout(
+            ()=>router.push(`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`), 500
+        )
+    }
 
     return(
         <>
@@ -60,14 +81,14 @@ const Product = ({product, key}) => {
                             }
                         </div>
                     </div>
-                    <Link href={`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`} >
-                        <button className="uppercase py-2 text-sm 
+                    {/* <Link href={} > */}
+                        <button onClick={orderNow} className="uppercase py-2 text-sm 
                             font-medium text-center text-white bg-red 
                             rounded hover:bg-red flex-auto w-full"
                         >
                             Order Now
                         </button>
-                    </Link>
+                    {/* </Link> */}
                 </div>
             </div>
         </>
