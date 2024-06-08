@@ -117,6 +117,10 @@ body {
   color: #ec1f25 !important;
 }
 
+
+.MuiSnackbarContent-message{
+  width: 100%;
+}
 @media (max-width:640px) {
   .select-size{
     padding: 10px 24px;

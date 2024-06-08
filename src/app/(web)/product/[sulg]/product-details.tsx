@@ -1,7 +1,7 @@
 'use client'
 
 import StarRating from "react-rating-stars-component";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import Image from 'next/image'
 import product from '@images/images/product.svg'
 import "slick-carousel/slick/slick.css";
@@ -11,8 +11,14 @@ import preImage from '@images/images/no-image.png';
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/service/features/cartSlice";
-
-
+import Button from '@mui/material/Button';
+import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import { SnackbarContent } from "@mui/material";
+import { ClassNames } from "@emotion/react";
+interface State extends SnackbarOrigin {
+    open: boolean;
+  }
 const ProductDetails = ({data, code}) => {
     const [productImg, setProductImg] = useState(data?.images[0]?.src);
     const [size, setSize] = useState('');
@@ -55,7 +61,13 @@ const ProductDetails = ({data, code}) => {
                 ()=>router.push(`/checkout`), 500
             )
         }
-        else setError('Please Select your Shoe Size')
+        else {
+            if(!open){
+                handleClick()
+            }
+            console.log('clickedxs')
+            setError('Please Select your Shoe Size')
+        }
     }
 
     function SampleNextArrow(props:any) {
@@ -126,8 +138,44 @@ const ProductDetails = ({data, code}) => {
         prevArrow: <SamplePrevArrow />,
     };
 
+    const [open, setOpen] = useState(false);
+    
+    const handleClick = () => {
+        console.log('open', open)
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        console.log('clicked')
+        setOpen(false);
+    };
+
     return (
         <>
+        <Snackbar
+            open={open}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            // autoHideDuration={6000}
+            onClose={handleClose}
+            // message="Please Select your Shoe Size"
+            // action={action}
+            
+        >
+            <SnackbarContent style={{
+                backgroundColor:'#da393de0',
+                }}
+                message={ 
+                <div className="">
+                    <i className="fas fa-exclamation-circle mr-2"></i> 
+                    <span id="client-snackbar">Please Select your Shoe Size</span>
+                    <span onClick={handleClose}>
+                        <i className="fas fa-times float-right mt-0.5 cursor-pointer"></i>
+                    </span>
+                </div> 
+                }
+            />
+        </Snackbar>
+
         <div className="block lg:hidden">
             <Image
                 src={productImg ? productImg : preImage}
@@ -237,6 +285,7 @@ const ProductDetails = ({data, code}) => {
             <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
                 Call Now: 01926644575
             </button>
+            {/* <button className="text-black" onClick={() => handleClick({ vertical: 'top', horizontal: 'right' })}>Open Snackbar</button> */}
         </div>
         {/* For large screen */}
         <div className="hidden lg:block">
