@@ -7,7 +7,7 @@ import footwareSize from '@images/images/footware-size.svg';
 const SingleProduct = ({params,searchParams}) => {
     const tmpCode = Number(searchParams.product);
     const id = idDecryption(tmpCode);
-    const product = getSingleProduct(id);
+    // const product = getSingleProduct(id);
 
     return (
         <>
@@ -21,10 +21,10 @@ const SingleProduct = ({params,searchParams}) => {
                         <h3 className="font-bold leading-9 mx-auto text-gray-900">
                             DESCRIPTION
                         </h3>
-                        <div 
+                        {/* <div 
                             className="text-black" 
                             dangerouslySetInnerHTML={{ __html:product?.description}}
-                        ></div>
+                        ></div> */}
                         <Image
                             src={footwareSize}
                             alt="payment-method"
