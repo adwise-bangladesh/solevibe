@@ -7,7 +7,7 @@ import footwareSize from '@images/images/footware-size.svg';
 const SingleProduct = ({params,searchParams}) => {
     const tmpCode = Number(searchParams.product);
     const id = idDecryption(tmpCode);
-    // const product = getSingleProduct(id);
+    const product = getSingleProduct(id);
 
     return (
         <>
