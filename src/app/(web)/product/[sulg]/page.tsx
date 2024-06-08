@@ -8,7 +8,8 @@ const SingleProduct = ({params,searchParams}) => {
     const tmpCode = Number(searchParams.product);
     const id = idDecryption(tmpCode);
     const product = getSingleProduct(id);
-
+    console.log('##############################')
+    console.log('one product', product)
     return (
         <>
             <div className="min-h-svh">
