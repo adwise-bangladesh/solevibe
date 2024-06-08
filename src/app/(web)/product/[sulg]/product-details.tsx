@@ -20,7 +20,11 @@ import Cookies from 'js-cookie';
 
 const ProductDetails = ({data, code}) => {
     // console.log('single product:', data)
-    console.log('product_solo:', Cookies.get('product_solo'))
+
+    useEffect(()=>{
+        const value = localStorage.getItem('myKey');
+        console.log('product_solo:', JSON.parse(value!))
+    })
     const [productImg, setProductImg] = useState(data?.images[0]?.src);
     const [size, setSize] = useState('');
     const [error, setError] = useState('');
