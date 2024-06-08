@@ -27,7 +27,7 @@ const ProductDetails = ({data, code}) => {
     const value = localStorage.getItem('myKey');
     pdata = JSON.parse(value!)
     console.log('product_solo:', pdata)
-    const [productImg, setProductImg] = useState(data?.images[0]?.src);
+    const [productImg, setProductImg] = useState(pdata?.images[0]?.src);
     const [size, setSize] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
@@ -39,7 +39,7 @@ const ProductDetails = ({data, code}) => {
       let newQty = qty
       console.log('qty', qty)
     //   if (increasePerClick) {
-        const existItem = cartItems.find((x) => x.id === data.id && x.size == size)
+        const existItem = cartItems.find((x) => x.id === pdata.id && x.size == size)
         console.log('existItem', existItem)
         if (existItem) {
         //   if (existItem.qty + 1 <= product.countInStock) {
@@ -51,12 +51,12 @@ const ProductDetails = ({data, code}) => {
     //   }
 
         const product = {
-            id: data?.id,
-            name: data?.name,
+            id: pdata?.id,
+            name: pdata?.name,
             size: size,
-            sku: data?.sku,
-            price: data?.price,
-            image: data?.images[0]?.src
+            sku: pdata?.sku,
+            price: pdata?.price,
+            image: pdata?.images[0]?.src
         }
       dispatch(addToCart({ ...product, qty: newQty }))
     }
@@ -204,7 +204,7 @@ const ProductDetails = ({data, code}) => {
                         //         style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
                         //     /> 
                         // </div> :
-                        data?.images?.map((image, idx)=>{
+                        pdata?.images?.map((image, idx)=>{
                             return(
                                 <div className="rounded" key={idx}>
                                     <Image
@@ -230,7 +230,7 @@ const ProductDetails = ({data, code}) => {
                 <div className="grid grid-cols-8 py-2">
                     <div className="col-span-3 md:col-span-2">
                         <StarRating 
-                            value={data?.average_rating} 
+                            value={pdata?.average_rating} 
                             // onStarClick={(nextValue, prevValue, name) => 
                             //     handleStarClick(nextValue, prevValue, name)}
                             starCount={5}
@@ -240,7 +240,7 @@ const ProductDetails = ({data, code}) => {
                         />
                     </div>
                     <div className="col-span-8 md:col-span-5"> 
-                        <p className="text-gray-900 mt-[6px]">{data?.average_rating}/5.00 ({data?.rating_count} customer Reviews)</p>
+                        <p className="text-gray-900 mt-[6px]">{pdata?.average_rating}/5.00 ({pdata?.rating_count} customer Reviews)</p>
                     </div>
                 </div>
             </div>
@@ -248,14 +248,14 @@ const ProductDetails = ({data, code}) => {
             <div className="pricing flex justify-center mb-3">
                 <p className="font-bold text-lg text-red-600 pr-3">PRICE:</p>
                 {
-                    data?.sale_price ? (
+                    pdata?.sale_price ? (
                         <>
                             <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">
-                                TK {data?.regular_price}
+                                TK {pdata?.regular_price}
                             </p>
-                            <p className="discount text-lg font-bold text-red">TK {data?.sale_price}</p>
+                            <p className="discount text-lg font-bold text-red">TK {pdata?.sale_price}</p>
                         </>
-                    ):(<p className="discount text-lg font-bold text-red">TK {data?.price}</p>)
+                    ):(<p className="discount text-lg font-bold text-red">TK {pdata?.price}</p>)
                 }
             </div>
             <div className="flex justify-center mt-3">
@@ -265,7 +265,7 @@ const ProductDetails = ({data, code}) => {
             </div>
             <div className="flex flex-wrap justify-evenly bg-[#EC1E24] my-4 py-2 rounded">
                 {
-                    data?.attributes[0]?.options.map(
+                    pdata?.attributes[0]?.options.map(
                         (option, idx) => <span key={idx}
                             className={`select-size ${option == size ? 'active' : ''} `} 
                             onClick={()=> {setSize(option == size ? '' : option); setError('')}}
@@ -309,7 +309,7 @@ const ProductDetails = ({data, code}) => {
                                     //     sizes="100vw"
                                     //     style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
                                     // /> :
-                                    data?.images?.map((image, idx)=>{
+                                    pdata?.images?.map((image, idx)=>{
                                         return(
                                             <div className="text-black bg-[green] rounded" key={1+idx}>
                                                 <Image
@@ -342,13 +342,13 @@ const ProductDetails = ({data, code}) => {
                 </div>
                 <div className="col-span-2">
                     <h3 className="font-bold leading-9 mt-6 text-gray-900">
-                        {data?.name}
+                        {pdata?.name}
                     </h3>
                     <div className="rating-data">
                         <div className="grid grid-cols-8 py-2">
                             <div className="col-span-3 md:col-span-2">
                                 <StarRating 
-                                    value={data?.average_rating} 
+                                    value={pdata?.average_rating} 
                                     // onStarClick={(nextValue, prevValue, name) => 
                                     //     handleStarClick(nextValue, prevValue, name)}
                                     starCount={5}
@@ -358,7 +358,7 @@ const ProductDetails = ({data, code}) => {
                                 />
                             </div>
                             <div className="col-span-8 md:col-span-5"> 
-                            <p className="text-gray-900 mt-[6px]">{data?.average_rating}/5.00 ({data?.rating_count} customer Reviews)</p>
+                            <p className="text-gray-900 mt-[6px]">{pdata?.average_rating}/5.00 ({pdata?.rating_count} customer Reviews)</p>
                             </div>
                         </div>
                     </div>
@@ -366,11 +366,11 @@ const ProductDetails = ({data, code}) => {
                     <p className="discount text-lg font-bold text-red-600">
                         PRICE: 
                         {
-                            data?.sale_price ? (
+                            pdata?.sale_price ? (
                                 <>
-                                    <span className="text-black text-base line-through">TK {data?.regular_price}</span> {data?.sale_price}
+                                    <span className="text-black text-base line-through">TK {pdata?.regular_price}</span> {pdata?.sale_price}
                                 </>
-                            ):(<>TK {data?.price}</>)
+                            ):(<>TK {pdata?.price}</>)
                         }
                     </p>
                     <div className="flex justify-center mt-3">
@@ -380,7 +380,7 @@ const ProductDetails = ({data, code}) => {
                     </div>
                     <div className="flex flex-wrap justify-evenly bg-[#EC1E24] px-3 my-3 rounded">
                     {
-                        data?.attributes[0]?.options.map(
+                        pdata?.attributes[0]?.options.map(
                             (option, idx) => <span key={11+idx}
                                 className={`select-size ${option == size ? 'active' : ''} `} 
                                 onClick={()=> {setSize(option == size ? '' : option); setError('')}}
