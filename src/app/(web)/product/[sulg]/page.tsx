@@ -14,7 +14,7 @@ const SingleProduct = ({params,searchParams}) => {
             <div className="min-h-svh">
                 <div className="container lg:container xl:container 2xl:container mx-auto">
                     <div className="my-10 mx-3">
-                        {/* <ProductDetails data={product} code={tmpCode}/> */}
+                        <ProductDetails data={product} code={tmpCode}/>
                     </div>
 
                     <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">
