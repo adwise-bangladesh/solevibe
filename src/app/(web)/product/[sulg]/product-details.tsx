@@ -16,10 +16,9 @@ import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import { SnackbarContent } from "@mui/material";
 import { ClassNames } from "@emotion/react";
-interface State extends SnackbarOrigin {
-    open: boolean;
-  }
+
 const ProductDetails = ({data, code}) => {
+    console.log('single product:', data)
     const [productImg, setProductImg] = useState(data?.images[0]?.src);
     const [size, setSize] = useState('');
     const [error, setError] = useState('');
@@ -141,12 +140,12 @@ const ProductDetails = ({data, code}) => {
     const [open, setOpen] = useState(false);
     
     const handleClick = () => {
-        console.log('open', open)
+        // console.log('open', open)
         setOpen(true);
     };
 
     const handleClose = () => {
-        console.log('clicked')
+        // console.log('clicked')
         setOpen(false);
     };
 
