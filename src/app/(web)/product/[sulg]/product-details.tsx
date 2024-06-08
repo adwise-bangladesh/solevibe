@@ -21,10 +21,12 @@ import Cookies from 'js-cookie';
 const ProductDetails = ({data, code}) => {
     // console.log('single product:', data)
 
+    let pdata:any
     useEffect(()=>{
-        const value = localStorage.getItem('myKey');
-        console.log('product_solo:', JSON.parse(value!))
-    })
+    },[])
+    const value = localStorage.getItem('myKey');
+    pdata = JSON.parse(value!)
+    console.log('product_solo:', pdata)
     const [productImg, setProductImg] = useState(data?.images[0]?.src);
     const [size, setSize] = useState('');
     const [error, setError] = useState('');
@@ -222,7 +224,7 @@ const ProductDetails = ({data, code}) => {
             </div>
             <h3 className="text-xl font-bold leading-6 mt-6 text-gray-900">
                 {/* Elegance Medicated Loafer Shoes For Men SB-S544 | Executive */}
-                {data?.name}
+                {pdata?.name} {pdata?.id}
             </h3>
             <div className="rating-data">
                 <div className="grid grid-cols-8 py-2">
@@ -242,7 +244,7 @@ const ProductDetails = ({data, code}) => {
                     </div>
                 </div>
             </div>
-            <p className="font-bold text-lg text-red-600 pr-3">CODE: {data?.sku}</p>
+            <p className="font-bold text-lg text-red-600 pr-3">CODE: {pdata?.sku}</p>
             <div className="pricing flex justify-center mb-3">
                 <p className="font-bold text-lg text-red-600 pr-3">PRICE:</p>
                 {

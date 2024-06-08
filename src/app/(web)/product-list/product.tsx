@@ -80,17 +80,20 @@ const Product = ({product, key}) => {
     
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-          // Set data in localStorage
-          localStorage.setItem('myKey', JSON.stringify(product));
-        }
+        
       }, []);
     const orderNow = () => {
         // Cookies.remove('product_solo')
-        Cookies.set('product_s', JSON.stringify(temp));
-        console.log('product_solo:', Cookies.get('product_s'))
+        // Cookies.set('product_s', JSON.stringify(temp));
+        // console.log('product_solo:', Cookies.get('product_s'))
+
+        if (typeof window !== 'undefined') {
+            // Set data in localStorage
+            localStorage.removeItem('myKey');
+            localStorage.setItem('myKey', JSON.stringify(product));
+        }
         setTimeout(
-            ()=>router.push(`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`), 500
+            ()=>router.push(`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`), 200
         )
     }
 
