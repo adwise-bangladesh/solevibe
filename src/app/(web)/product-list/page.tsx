@@ -10,10 +10,8 @@ import ProductListLoader from "@/components/loader/ProductListLoader";
 import { getProducts, setProducts } from "../../../service/features/data-service";
 
 
-
 const ProductList = () => {
     // const {data, isLoading } = useGetAllProductsQuery({});
-
     const data = getProducts()
     return (
         <div className="min-h-svh">

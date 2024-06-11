@@ -1,3 +1,5 @@
+'use client'
+
 import { idDecryption } from "@/service/helpers/DataHelper";
 import ProductDetails from "./product-details";
 import { getSingleProduct } from "@/service/features/data-service";
@@ -5,14 +7,14 @@ import Image from 'next/image'
 import footwareSize from '@images/images/footware-size.svg';
 import Cookies from 'js-cookie';
 
-const SingleProduct = ({params,searchParams}) => {
+const SingleProduct = ({searchParams}) => {
     const tmpCode = Number(searchParams.product);
     const id = idDecryption(tmpCode);
-    const product = getSingleProduct(id);
-    console.log('product_solo:', Cookies.get('product_solo'))
-    // const data = JSON?.parse(Cookies?.get('product_solo')!);
-    // console.log('##############################')
-    // console.log('one product', data)
+    let product:any
+    const value = localStorage.getItem('solo_product');
+    product = JSON.parse(value!)
+    console.log('product_solo:', product)
+    // const product = getSingleProduct(id);
     return (
         <>
             <div className="min-h-svh">

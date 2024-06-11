@@ -1,5 +1,3 @@
-'use client'
-
 import StarRating from "react-rating-stars-component";
 import { useState, useEffect, Fragment } from 'react';
 import Image from 'next/image'
@@ -19,27 +17,18 @@ import { ClassNames } from "@emotion/react";
 import Cookies from 'js-cookie';
 
 const ProductDetails = ({data, code}) => {
-    // console.log('single product:', data)
-
-    let pdata:any
-    useEffect(()=>{
-    },[])
-    const value = localStorage.getItem('myKey');
-    pdata = JSON.parse(value!)
-    console.log('product_solo:', pdata)
-    const [productImg, setProductImg] = useState(pdata?.images[0]?.src);
+    const [productImg, setProductImg] = useState(data?.images[0]?.src);
     const [size, setSize] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
-
     const dispatch = useDispatch()
     const { cartItems } = useSelector((state:any) => state.cart)
     const [qty, setQty] = useState(1)
+
     const addToCartHandler = () => {
-      let newQty = qty
-      console.log('qty', qty)
-    //   if (increasePerClick) {
-        const existItem = cartItems.find((x) => x.id === pdata.id && x.size == size)
+        let newQty = qty
+        console.log('qty', qty)
+        const existItem = cartItems.find((x) => x.id === data.id && x.size == size)
         console.log('existItem', existItem)
         if (existItem) {
         //   if (existItem.qty + 1 <= product.countInStock) {
@@ -48,17 +37,16 @@ const ProductDetails = ({data, code}) => {
         //     return alert('No more product exist')
         //   }
         }
-    //   }
 
         const product = {
-            id: pdata?.id,
-            name: pdata?.name,
+            id: data?.id,
+            name: data?.name,
             size: size,
-            sku: pdata?.sku,
-            price: pdata?.price,
-            image: pdata?.images[0]?.src
+            sku: data?.sku,
+            price: data?.price,
+            image: data?.images[0]?.src
         }
-      dispatch(addToCart({ ...product, qty: newQty }))
+        dispatch(addToCart({ ...product, qty: newQty }))
     }
 
     const orderNow = () => {
@@ -69,7 +57,7 @@ const ProductDetails = ({data, code}) => {
             )
         }
         else {
-            handleClick()
+            snackbarClick()
             setError('Please Select your Shoe Size')
         }
     }
@@ -144,13 +132,11 @@ const ProductDetails = ({data, code}) => {
 
     const [open, setOpen] = useState(false);
     
-    const handleClick = () => {
-        // console.log('open', open)
+    const snackbarClick = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
-        // console.log('clicked')
+    const snackbarClose = () => {
         setOpen(false);
     };
 
@@ -159,20 +145,17 @@ const ProductDetails = ({data, code}) => {
         <Snackbar
             open={open}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            // autoHideDuration={6000}
-            onClose={handleClose}
-            // message="Please Select your Shoe Size"
-            // action={action}
-            
+            autoHideDuration={6000}
+            onClose={snackbarClose}
         >
             <SnackbarContent style={{
-                backgroundColor:'#da393de0',
+                    backgroundColor:'#da393de0',
                 }}
                 message={ 
                 <div className="">
                     <i className="fas fa-exclamation-circle mr-2"></i> 
                     <span id="client-snackbar">Please Select your Shoe Size</span>
-                    <span onClick={handleClose}>
+                    <span onClick={snackbarClose}>
                         <i className="fas fa-times float-right mt-0.5 cursor-pointer"></i>
                     </span>
                 </div> 
@@ -204,7 +187,7 @@ const ProductDetails = ({data, code}) => {
                         //         style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
                         //     /> 
                         // </div> :
-                        pdata?.images?.map((image, idx)=>{
+                        data?.images?.map((image, idx)=>{
                             return(
                                 <div className="rounded" key={idx}>
                                     <Image
@@ -224,13 +207,13 @@ const ProductDetails = ({data, code}) => {
             </div>
             <h3 className="text-xl font-bold leading-6 mt-6 text-gray-900">
                 {/* Elegance Medicated Loafer Shoes For Men SB-S544 | Executive */}
-                {pdata?.name} {pdata?.id}
+                {data?.name} {data?.id}
             </h3>
             <div className="rating-data">
                 <div className="grid grid-cols-8 py-2">
                     <div className="col-span-3 md:col-span-2">
                         <StarRating 
-                            value={pdata?.average_rating} 
+                            value={data?.average_rating} 
                             // onStarClick={(nextValue, prevValue, name) => 
                             //     handleStarClick(nextValue, prevValue, name)}
                             starCount={5}
@@ -240,22 +223,22 @@ const ProductDetails = ({data, code}) => {
                         />
                     </div>
                     <div className="col-span-8 md:col-span-5"> 
-                        <p className="text-gray-900 mt-[6px]">{pdata?.average_rating}/5.00 ({pdata?.rating_count} customer Reviews)</p>
+                        <p className="text-gray-900 mt-[6px]">{data?.average_rating}/5.00 ({data?.rating_count} customer Reviews)</p>
                     </div>
                 </div>
             </div>
-            <p className="font-bold text-lg text-red-600 pr-3">CODE: {pdata?.sku}</p>
+            <p className="font-bold text-lg text-red-600 pr-3">CODE: {data?.sku}</p>
             <div className="pricing flex justify-center mb-3">
                 <p className="font-bold text-lg text-red-600 pr-3">PRICE:</p>
                 {
-                    pdata?.sale_price ? (
+                    data?.sale_price ? (
                         <>
                             <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">
-                                TK {pdata?.regular_price}
+                                TK {data?.regular_price}
                             </p>
-                            <p className="discount text-lg font-bold text-red">TK {pdata?.sale_price}</p>
+                            <p className="discount text-lg font-bold text-red">TK {data?.sale_price}</p>
                         </>
-                    ):(<p className="discount text-lg font-bold text-red">TK {pdata?.price}</p>)
+                    ):(<p className="discount text-lg font-bold text-red">TK {data?.price}</p>)
                 }
             </div>
             <div className="flex justify-center mt-3">
@@ -265,7 +248,7 @@ const ProductDetails = ({data, code}) => {
             </div>
             <div className="flex flex-wrap justify-evenly bg-[#EC1E24] my-4 py-2 rounded">
                 {
-                    pdata?.attributes[0]?.options.map(
+                    data?.attributes[0]?.options.map(
                         (option, idx) => <span key={idx}
                             className={`select-size ${option == size ? 'active' : ''} `} 
                             onClick={()=> {setSize(option == size ? '' : option); setError('')}}
@@ -289,7 +272,7 @@ const ProductDetails = ({data, code}) => {
             <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
                 Call Now: 01926644575
             </button>
-            {/* <button className="text-black" onClick={() => handleClick({ vertical: 'top', horizontal: 'right' })}>Open Snackbar</button> */}
+            {/* <button className="text-black" onClick={() => snackbarClick({ vertical: 'top', horizontal: 'right' })}>Open Snackbar</button> */}
         </div>
         {/* For large screen */}
         <div className="hidden lg:block">
@@ -309,7 +292,7 @@ const ProductDetails = ({data, code}) => {
                                     //     sizes="100vw"
                                     //     style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
                                     // /> :
-                                    pdata?.images?.map((image, idx)=>{
+                                    data?.images?.map((image, idx)=>{
                                         return(
                                             <div className="text-black bg-[green] rounded" key={1+idx}>
                                                 <Image
@@ -342,13 +325,13 @@ const ProductDetails = ({data, code}) => {
                 </div>
                 <div className="col-span-2">
                     <h3 className="font-bold leading-9 mt-6 text-gray-900">
-                        {pdata?.name}
+                        {data?.name}
                     </h3>
                     <div className="rating-data">
                         <div className="grid grid-cols-8 py-2">
                             <div className="col-span-3 md:col-span-2">
                                 <StarRating 
-                                    value={pdata?.average_rating} 
+                                    value={data?.average_rating} 
                                     // onStarClick={(nextValue, prevValue, name) => 
                                     //     handleStarClick(nextValue, prevValue, name)}
                                     starCount={5}
@@ -358,7 +341,7 @@ const ProductDetails = ({data, code}) => {
                                 />
                             </div>
                             <div className="col-span-8 md:col-span-5"> 
-                            <p className="text-gray-900 mt-[6px]">{pdata?.average_rating}/5.00 ({pdata?.rating_count} customer Reviews)</p>
+                            <p className="text-gray-900 mt-[6px]">{data?.average_rating}/5.00 ({data?.rating_count} customer Reviews)</p>
                             </div>
                         </div>
                     </div>
@@ -366,11 +349,11 @@ const ProductDetails = ({data, code}) => {
                     <p className="discount text-lg font-bold text-red-600">
                         PRICE: 
                         {
-                            pdata?.sale_price ? (
+                            data?.sale_price ? (
                                 <>
-                                    <span className="text-black text-base line-through">TK {pdata?.regular_price}</span> {pdata?.sale_price}
+                                    <span className="text-black text-base line-through">TK {data?.regular_price}</span> {data?.sale_price}
                                 </>
-                            ):(<>TK {pdata?.price}</>)
+                            ):(<>TK {data?.price}</>)
                         }
                     </p>
                     <div className="flex justify-center mt-3">
@@ -380,7 +363,7 @@ const ProductDetails = ({data, code}) => {
                     </div>
                     <div className="flex flex-wrap justify-evenly bg-[#EC1E24] px-3 my-3 rounded">
                     {
-                        pdata?.attributes[0]?.options.map(
+                        data?.attributes[0]?.options.map(
                             (option, idx) => <span key={11+idx}
                                 className={`select-size ${option == size ? 'active' : ''} `} 
                                 onClick={()=> {setSize(option == size ? '' : option); setError('')}}

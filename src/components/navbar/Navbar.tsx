@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const Navbar = () =>{
     return(
         <nav className="bg-white border-gray-200">
@@ -42,9 +44,9 @@ const Navbar = () =>{
                         </li>
                     </ul>
                 </div>
-                <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <Link href="/checkout" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="../../../../icons/shopping-bag 1.svg" className="h-8" alt="Flowbite Logo" />
-                </a>
+                </Link>
             </div>
         </nav>
     )

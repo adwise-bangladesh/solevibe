@@ -53,6 +53,7 @@ const Checkout = () => {
         address: "",
         shipping_area: '70',
       };
+
       const validationSchema = Yup.object().shape({
         name: Yup.string().required("Name is required"),
         phone_num: Yup.string().required("Phone Number is required"),
@@ -61,12 +62,66 @@ const Checkout = () => {
       })
       const onSubmit = async (values: any) => {
         console.log("Form Submit", values);
-        const fd = new FormData();
-        fd.append("training_name", values.training_name);
-        fd.append("scheduling_unit", values.scheduling_unit);
-        fd.append("capacity", values.capacity);
-        fd.append("category_id", values.category_id);
+
+        const data = {
+            payment_method: "bacs",
+            payment_method_title: "Direct Bank Transfer",
+            set_paid: true,
+            billing: {
+              first_name: values.name,
+              last_name: "",
+              address_1: values.address,
+              address_2: "",
+              city: "",
+              state: "",
+              postcode: "",
+              country: "",
+              email: "",
+              phone: values?.phone_num
+            },
+            shipping: {
+                first_name: values.name,
+                last_name: "",
+                address_1: values.address,
+                address_2: "",
+                city: "",
+                state: "",
+                postcode: "",
+                country: "",
+                email: "",
+                phone: values?.phone_num
+            },
+            line_items: cartItems?.map((product) => {
+                return {
+                    product_id: product?.id,
+                    quantity: product?.qty,
+                    value: product?.size
+                }
+            }),
+            shipping_lines: [
+              {
+                method_id: "free_shipping",
+                method_title: "Free Shipping",
+                total: Number(values?.shipping_area) + Number(itemsPrice)
+              }
+            ]
+        };
+        console.log('form data', data);
+
+        const res = await fetch('https://backend.solevibe.xyz/wp-json/wc/v3/orders',{
+            method: 'POST',
+            headers: {
+                Authorization: `Basic Y2tfZTljOWYyZDhiNDkzZTUzNjM5ODBlNzllZmJiMDFiZjUxOTdjM2E0NTpjc19iYWQ1MWI0NTJjYTI0ZjFiNTM3MDQwMmFhOTFkYjI3NjRjYTFlOGJj`
+            },
+            body: JSON.stringify(data),
+        })
+        
+        const response = await res.json()
+
+        console.log('response:', response);
+
       };
+
       const formik = useFormik({ initialValues, onSubmit, validationSchema });
 
     return (
@@ -267,18 +322,24 @@ const Checkout = () => {
                                                 <p className="text-lg font-bold text-red-600">TK {product?.price}</p>
                                             </div>
                                             <div className="col-span-4">
-                                                <div className="quantity-btn btn-group text-[#2f2d2df2]">
-                                                    <button className="decrement-btn" onClick={ () => addToCartHandler(product, product?.qty > 1 ? product?.qty-1 : 1)}>
-                                                        -
-                                                    </button>
-                                                    <p>{product?.qty}</p>
-                                                    <button className="increment-btn" onClick={ () => addToCartHandler(product, product?.qty+1)}>
-                                                        +
-                                                    </button>
+                                                <div className="grid grid-cols-3 gap-4">
+                                                    <div className="col-span-2">
+                                                        <div className="quantity-btn btn-group text-[#2f2d2df2]">
+                                                            <button className="decrement-btn" onClick={ () => addToCartHandler(product, product?.qty > 1 ? product?.qty-1 : 1)}>
+                                                                -
+                                                            </button>
+                                                            <p>{product?.qty}</p>
+                                                            <button className="increment-btn" onClick={ () => addToCartHandler(product, product?.qty+1)}>
+                                                                +
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button className='text-rose-900 float-right' onClick={ () => removeFromCartHandler(product?.id, product?.size)}>
+                                                            <i className="fas fa-trash mt-2"></i>
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                                <button className='text-rose-900 float-right' onClick={ () => removeFromCartHandler(product?.id, product?.size)}>
-                                                    <i className="fas fa-trash"></i>
-                                                </button>
                                             </div>
                                         </div>
                                     </div>
