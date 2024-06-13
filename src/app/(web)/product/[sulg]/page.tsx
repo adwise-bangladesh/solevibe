@@ -8,8 +8,8 @@ import footwareSize from '@images/images/footware-size.svg';
 import Cookies from 'js-cookie';
 
 const SingleProduct = ({searchParams}) => {
-    const tmpCode = Number(searchParams.product);
-    const id = idDecryption(tmpCode);
+    // const tmpCode = Number(searchParams.product);
+    // const id = idDecryption(tmpCode);
     let product:any
     const value = localStorage.getItem('solo_product');
     product = JSON.parse(value!)
@@ -20,7 +20,7 @@ const SingleProduct = ({searchParams}) => {
             <div className="min-h-svh">
                 <div className="container lg:container xl:container 2xl:container mx-auto">
                     <div className="my-10 mx-3">
-                        <ProductDetails data={product} code={tmpCode}/>
+                        <ProductDetails data={product}/>
                     </div>
 
                     <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">

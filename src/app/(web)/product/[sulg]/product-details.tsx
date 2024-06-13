@@ -16,9 +16,12 @@ import { SnackbarContent } from "@mui/material";
 import { ClassNames } from "@emotion/react";
 import Cookies from 'js-cookie';
 
-const ProductDetails = ({data, code}) => {
+const ProductDetails = ({data}) => {
     const [productImg, setProductImg] = useState(data?.images[0]?.src);
-    const [size, setSize] = useState('');
+    const [size, setSize] = useState({
+        number: '',
+        key: -1
+    });
     const [error, setError] = useState('');
     const router = useRouter();
     const dispatch = useDispatch()
@@ -28,7 +31,7 @@ const ProductDetails = ({data, code}) => {
     const addToCartHandler = () => {
         let newQty = qty
         console.log('qty', qty)
-        const existItem = cartItems.find((x) => x.id === data.id && x.size == size)
+        const existItem = cartItems.find((x) => x.id === data.id && x.size == size.number)
         console.log('existItem', existItem)
         if (existItem) {
         //   if (existItem.qty + 1 <= product.countInStock) {
@@ -41,7 +44,8 @@ const ProductDetails = ({data, code}) => {
         const product = {
             id: data?.id,
             name: data?.name,
-            size: size,
+            size: size.number,
+            variation: data?.variations[size.key],
             sku: data?.sku,
             price: data?.price,
             image: data?.images[0]?.src
@@ -50,7 +54,7 @@ const ProductDetails = ({data, code}) => {
     }
 
     const orderNow = () => {
-        if(size){
+        if(size.number){
             addToCartHandler();
             setTimeout(
                 ()=>router.push(`/checkout`), 500
@@ -250,8 +254,8 @@ const ProductDetails = ({data, code}) => {
                 {
                     data?.attributes[0]?.options.map(
                         (option, idx) => <span key={idx}
-                            className={`select-size ${option == size ? 'active' : ''} `} 
-                            onClick={()=> {setSize(option == size ? '' : option); setError('')}}
+                            className={`select-size ${option == size.number ? 'active' : ''} `} 
+                            onClick={()=> {setSize({number: option == size.number ? '' : option, key:idx}); setError('')}}
                         >{option}</span>
                     )
                 }

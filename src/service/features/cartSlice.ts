@@ -5,6 +5,7 @@ interface CartItem {
   id: string;
   name: string;
   size: any;
+  variation: any;
   qty: number;
   sku: any;
   price: number;

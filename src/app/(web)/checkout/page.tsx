@@ -8,8 +8,10 @@ import {
     FormikProvider, ErrorMessage,
 } from "formik";
 import * as Yup from "yup";
+import { useRouter } from 'next/navigation';
 
 const Checkout = () => {
+    const router = useRouter();
     const [rating, setRating] = useState(0);
     const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
         setRating(nextValue);
@@ -49,6 +51,7 @@ const Checkout = () => {
 
       const initialValues: any = {
         name: "",
+        email: "",
         phone_num: "",
         address: "",
         shipping_area: '70',
@@ -56,6 +59,7 @@ const Checkout = () => {
 
       const validationSchema = Yup.object().shape({
         name: Yup.string().required("Name is required"),
+        email: Yup.string().email("Field should contain a valid email").max(255),
         phone_num: Yup.string().required("Phone Number is required"),
         address: Yup.string().required("Address is required"),
 
@@ -63,62 +67,63 @@ const Checkout = () => {
       const onSubmit = async (values: any) => {
         console.log("Form Submit", values);
 
-        const data = {
-            payment_method: "bacs",
-            payment_method_title: "Direct Bank Transfer",
-            set_paid: true,
-            billing: {
-              first_name: values.name,
-              last_name: "",
-              address_1: values.address,
-              address_2: "",
-              city: "",
-              state: "",
-              postcode: "",
-              country: "",
-              email: "",
-              phone: values?.phone_num
-            },
-            shipping: {
-                first_name: values.name,
-                last_name: "",
-                address_1: values.address,
-                address_2: "",
-                city: "",
-                state: "",
-                postcode: "",
-                country: "",
-                email: "",
-                phone: values?.phone_num
-            },
-            line_items: cartItems?.map((product) => {
-                return {
-                    product_id: product?.id,
-                    quantity: product?.qty,
-                    value: product?.size
-                }
-            }),
-            shipping_lines: [
-              {
-                method_id: "free_shipping",
-                method_title: "Free Shipping",
-                total: Number(values?.shipping_area) + Number(itemsPrice)
-              }
-            ]
-        };
-        console.log('form data', data);
-
         const res = await fetch('https://backend.solevibe.xyz/wp-json/wc/v3/orders',{
             method: 'POST',
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Basic Y2tfZTljOWYyZDhiNDkzZTUzNjM5ODBlNzllZmJiMDFiZjUxOTdjM2E0NTpjc19iYWQ1MWI0NTJjYTI0ZjFiNTM3MDQwMmFhOTFkYjI3NjRjYTFlOGJj`
             },
-            body: JSON.stringify(data),
-        })
+            body: JSON.stringify(
+                {
+                    "payment_method": "bacs",
+                    "payment_method_title": "Direct Bank Transfer",
+                    "set_paid": true,
+                    "billing": {
+                      "first_name": values?.name,
+                      "last_name": "",
+                      "address_1": values?.address,
+                      "address_2": "",
+                      "city": "",
+                      "state": "",
+                      "postcode": "",
+                      "country": "",
+                      "email": values?.email || 'example@example.com',
+                      "phone": values?.phone_num
+                    },
+                    "shipping": {
+                      "first_name": values?.name,
+                      "last_name": "",
+                      "address_1": values?.address,
+                      "address_2": "",
+                      "city": "",
+                      "state": "",
+                      "postcode": "",
+                      "country": ""
+                    },
+                    "line_items": cartItems?.map((product) => {
+                        return {
+                            product_id: product?.id,
+                            variation_id: product?.variation,
+                            quantity: product?.qty,
+                        }
+                    }),
+                    "shipping_lines": [
+                      {
+                        "method_id": "flat_rate",
+                        "method_title": "Flat Rate",
+                        "total": String(Number(values?.shipping_area) + Number(itemsPrice)) 
+                      }
+                    ]
+                }
+            ),
+            redirect: "follow"
+        }).then((response) => response.text())
+        .then((result) => router.push(`/order-success`))
+        .catch((error) => console.error(error));
         
-        const response = await res.json()
+        // const response = await res.json()
 
-        console.log('response:', response);
+        // console.log('response:', response);
 
       };
 
@@ -171,16 +176,6 @@ const Checkout = () => {
                                     Mobile Number
                                 </label>
                                 <div className="mt-2">
-                                    {/* <input
-                                        id="phone_num"
-                                        name="phone_num"
-                                        type="phone_num"
-                                        autoComplete="phone_num"
-                                        required
-                                        placeholder="Mobile"
-                                        className="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    /> */}
-
                                     <Field
                                         onChange={formik.handleChange}
                                         type="text"
@@ -190,6 +185,28 @@ const Checkout = () => {
                                         className="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     />
                                     <ErrorMessage name="phone_num">
+                                        {(msg) => (
+                                            <div style={{ color: "red" }}>{msg}</div>
+                                        )}
+                                    </ErrorMessage>
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                                    Email
+                                </label>
+                                <div className="mt-2">
+                                    <Field
+                                        onChange={formik.handleChange}
+                                        type="text"
+                                        name="email"
+                                        id="email"
+                                        placeholder="Enter Email(Optional)"
+                                        className="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm 
+                                        ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 
+                                        focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    />
+                                    <ErrorMessage name="email">
                                         {(msg) => (
                                             <div style={{ color: "red" }}>{msg}</div>
                                         )}
