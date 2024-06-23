@@ -4,26 +4,12 @@ import { useState } from 'react';
 import Image from 'next/image'
 import thankyou from '@images/icons/thankyou.svg'
 import imgSrc from '@images/images/payment-method.svg'
+import { useSelector } from 'react-redux';
 
 const OrderSuccess = () => {
-    const [rating, setRating] = useState(0);
-    const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
-        setRating(nextValue);
-    }
-    let minValue = 0, maxValue = 100
-    const [count, setCount] = useState(minValue);
-
-    const handleIncrementCounter = () => {
-        if (count < maxValue) {
-        setCount((prevState) => prevState + 1);
-        }
-    };
-
-    const handleDecrementCounter = () => {
-        if (count > minValue) {
-        setCount((prevState) => prevState - 1);
-        }
-    };
+    const { cartItems, itemsPrice, paymentMethod } = useSelector((state:any) => state.cart)
+    console.log('itemsPrice', itemsPrice)
+    console.log('paymentMethod', paymentMethod)
     return (
         <div className="min-h-svh">
             <div className="container mx-auto">
@@ -56,9 +42,9 @@ const OrderSuccess = () => {
                             <p className="text-lg text-black mb-2">Total: </p>
                         </div>
                         <div className="col-span-2"> 
-                            <p className="text-lg text-red-600 mb-2"> TK 1,798 </p>
-                            <p className="text-lg text-red-600 mb-2"> TK 80 </p>
-                            <p className="text-lg text-red-600 mb-2"> TK 1,998 </p>
+                            <p className="text-lg text-red-600 mb-2"> TK {itemsPrice} </p>
+                            <p className="text-lg text-red-600 mb-2"> TK {paymentMethod} </p>
+                            <p className="text-lg text-red-600 mb-2"> TK {Number(paymentMethod) + Number(itemsPrice) } </p>
                         </div>
                     </div>
 

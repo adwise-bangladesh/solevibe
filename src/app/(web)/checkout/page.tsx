@@ -1,6 +1,6 @@
 'use client'
 
-import { addToCart, removeFromCart } from '@/service/features/cartSlice';
+import { addToCart, removeFromCart, savePaymentMethod } from '@/service/features/cartSlice';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -9,8 +9,10 @@ import {
 } from "formik";
 import * as Yup from "yup";
 import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2'
 
 const Checkout = () => {
+    const [isLoading, setLoading] = useState(false);
     const router = useRouter();
     const [rating, setRating] = useState(0);
     const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
@@ -34,39 +36,68 @@ const Checkout = () => {
     
     const dispatch = useDispatch()
 
-    const { cartItems, itemsPrice } = useSelector((state:any) => state.cart)
+    const { cartItems, itemsPrice, paymentMethod } = useSelector((state:any) => state.cart)
     const [qty, setQty] = useState(1)
 
     console.log('cartItems', cartItems)
     console.log('itemsPrice', itemsPrice)
+    console.log('paymentMethod', paymentMethod)
 
 
     const removeFromCartHandler = (id, size) => {
-        dispatch(removeFromCart({id, size}))
-      }
+        Swal.fire({
+            title: "Do you want to remove item?",
+            showCancelButton: true,
+            confirmButtonText: "Remove",
+            confirmButtonColor: "#EC1E24",
+            showClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeInUp
+                  animate__faster
+                `
+            },
+            hideClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeOutDown
+                  animate__faster
+                `
+            }
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                dispatch(removeFromCart({id, size}))
+            } 
+        });
+    }
     
-      const addToCartHandler = async (product, qty) => {
+    const addToCartHandler = async (product, qty) => {
         dispatch(addToCart({ ...product, qty }))
-      }
+    }
 
-      const initialValues: any = {
+    const setPaymentMethod = async (value) => {
+        dispatch(savePaymentMethod(value))
+    }
+
+    const initialValues: any = {
         name: "",
         email: "",
         phone_num: "",
         address: "",
         shipping_area: '70',
-      };
+    };
 
-      const validationSchema = Yup.object().shape({
+    const validationSchema = Yup.object().shape({
         name: Yup.string().required("Name is required"),
         email: Yup.string().email("Field should contain a valid email").max(255),
         phone_num: Yup.string().required("Phone Number is required"),
         address: Yup.string().required("Address is required"),
 
-      })
-      const onSubmit = async (values: any) => {
+    })
+    const onSubmit = async (values: any) => {
         console.log("Form Submit", values);
-
+        setLoading(true)
         const res = await fetch('https://backend.solevibe.xyz/wp-json/wc/v3/orders',{
             method: 'POST',
             headers: {
@@ -118,16 +149,28 @@ const Checkout = () => {
             ),
             redirect: "follow"
         }).then((response) => response.text())
-        .then((result) => router.push(`/order-success`))
+        .then((result) => {
+            setPaymentMethod(values?.shipping_area);
+            setLoading(false);
+            router.push(`/order-success`); 
+        })
         .catch((error) => console.error(error));
-        
-        // const response = await res.json()
+    };
 
-        // console.log('response:', response);
+    const formik = useFormik({ initialValues, onSubmit, validationSchema });
 
-      };
-
-      const formik = useFormik({ initialValues, onSubmit, validationSchema });
+    const showSwal = () => {
+        Swal.fire({
+            title: "Do you want to remove item?",
+            showCancelButton: true,
+            confirmButtonText: "Remove",
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+            //   Swal.fire("Saved!", "", "success");
+            } 
+        });
+    }
 
     return (
         <div className="min-h-svh">
@@ -136,6 +179,7 @@ const Checkout = () => {
                     <h3 className="font-bold leading-9 mx-auto text-gray-900">
                         Please fill Up The Form To Complete The Order
                     </h3>
+                    <button onClick={showSwal}>Show SweetAlert2 modal</button>
                 </div>
                 <FormikProvider value={formik} >
                     <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">
@@ -319,7 +363,7 @@ const Checkout = () => {
                                     focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
                                     focus-visible:outline-indigo-600"
                                 >
-                                    Confirm Order
+                                    {isLoading ? 'Loading...' : 'Confirm Order'}
                                 </button>
                             </div>
                         </Form>
