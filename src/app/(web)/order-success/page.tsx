@@ -1,13 +1,19 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image'
 import thankyou from '@images/icons/thankyou.svg'
 import imgSrc from '@images/images/payment-method.svg'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { emptyCart } from '@/service/features/cartSlice';
 
 const OrderSuccess = () => {
     const { cartItems, itemsPrice, paymentMethod } = useSelector((state:any) => state.cart)
+    const dispatch = useDispatch()
+    // onMount
+    useEffect(() => {
+        dispatch(emptyCart())
+    }, []);
     console.log('itemsPrice', itemsPrice)
     console.log('paymentMethod', paymentMethod)
     return (

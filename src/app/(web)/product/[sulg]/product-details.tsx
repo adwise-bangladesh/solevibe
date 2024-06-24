@@ -54,6 +54,7 @@ const ProductDetails = ({data}) => {
     }
 
     const orderNow = () => {
+        console.log('size.number', size.number)
         if(size.number){
             addToCartHandler();
             setTimeout(
@@ -180,17 +181,6 @@ const ProductDetails = ({data}) => {
             <div className="px-7 mt-3">
                 <Slider {...settings}>
                     {
-                        // isLoading ? 
-                        // <div className="rounded" >
-                        //     <Image
-                        //         src={preImage}
-                        //         alt="product"
-                        //         width={0}
-                        //         height={0}
-                        //         sizes="100vw"
-                        //         style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
-                        //     /> 
-                        // </div> :
                         data?.images?.map((image, idx)=>{
                             return(
                                 <div className="rounded" key={idx}>
@@ -210,7 +200,6 @@ const ProductDetails = ({data}) => {
                 </Slider>
             </div>
             <h3 className="text-xl font-bold leading-6 mt-6 text-gray-900">
-                {/* Elegance Medicated Loafer Shoes For Men SB-S544 | Executive */}
                 {data?.name} {data?.id}
             </h3>
             <div className="rating-data">
@@ -218,8 +207,6 @@ const ProductDetails = ({data}) => {
                     <div className="col-span-3 md:col-span-2">
                         <StarRating 
                             value={data?.average_rating} 
-                            // onStarClick={(nextValue, prevValue, name) => 
-                            //     handleStarClick(nextValue, prevValue, name)}
                             starCount={5}
                             starColor={'#ffb400'}
                             emptyStarColor={'#ccc'}
@@ -276,7 +263,6 @@ const ProductDetails = ({data}) => {
             <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
                 Call Now: 01926644575
             </button>
-            {/* <button className="text-black" onClick={() => snackbarClick({ vertical: 'top', horizontal: 'right' })}>Open Snackbar</button> */}
         </div>
         {/* For large screen */}
         <div className="hidden lg:block">
@@ -366,11 +352,20 @@ const ProductDetails = ({data}) => {
                         </h3>
                     </div>
                     <div className="flex flex-wrap justify-evenly bg-[#EC1E24] px-3 my-3 rounded">
-                    {
+                    {/* {
                         data?.attributes[0]?.options.map(
                             (option, idx) => <span key={11+idx}
                                 className={`select-size ${option == size ? 'active' : ''} `} 
                                 onClick={()=> {setSize(option == size ? '' : option); setError('')}}
+                            >{option}</span>
+                        )
+                    } */}
+
+                    {
+                        data?.attributes[0]?.options.map(
+                            (option, idx) => <span key={idx}
+                                className={`select-size ${option == size.number ? 'active' : ''} `} 
+                                onClick={()=> {setSize({number: option == size.number ? '' : option, key:idx}); setError('')}}
                             >{option}</span>
                         )
                     }

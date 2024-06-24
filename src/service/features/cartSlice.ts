@@ -99,6 +99,12 @@ const cartSlice = createSlice({
       Cookies.set('cart', JSON.stringify(state));
     },
 
+    emptyCart: (state) => {
+      state.cartItems = [];
+      Cookies.set('cart', JSON.stringify(state));
+      // console.log('cart:', Cookies.get('cart'))
+    },
+
     saveShippingAddress: (state, action: PayloadAction<ShippingAddress>) => {
       state.shippingAddress = action.payload;
       Cookies.set('cart', JSON.stringify(state));
@@ -116,6 +122,7 @@ const cartSlice = createSlice({
 export const {
   addToCart,
   removeFromCart,
+  emptyCart,
   saveShippingAddress,
   savePaymentMethod,
   hideLoading,

@@ -4,7 +4,7 @@ const fs = require("fs");
 
 async function getData() {
     
-    const res = await fetch('https://backend.solevibe.xyz/wp-json/wc/v3/products',{
+    const res = await fetch('https://backend.solevibe.xyz/wp-json/wc/v3/products?per_page=100',{
         headers: {
             Authorization: `Basic Y2tfZTljOWYyZDhiNDkzZTUzNjM5ODBlNzllZmJiMDFiZjUxOTdjM2E0NTpjc19iYWQ1MWI0NTJjYTI0ZjFiNTM3MDQwMmFhOTFkYjI3NjRjYTFlOGJj`
         }
@@ -13,6 +13,8 @@ async function getData() {
       console.log('Failed to data fetch')
     }
     const result = await res.json();
+
+    console.log('result', result)
     setProducts(result);
     return res
     
