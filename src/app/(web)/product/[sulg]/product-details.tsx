@@ -62,7 +62,19 @@ const ProductDetails = ({data}) => {
             )
         }
         else {
-            snackbarClick()
+            snackbarClick('#da393de0', 'Please Select your Shoe Size')
+            setError('Please Select your Shoe Size')
+        }
+    }
+    const cartNow = () => {
+        console.log('cart cart')
+        if(size.number){
+            addToCartHandler();
+            snackbarClick('#30b04d', 'Product added successfully')
+            
+        }
+        else {
+            snackbarClick('#da393de0', 'Please Select your Shoe Size')
             setError('Please Select your Shoe Size')
         }
     }
@@ -136,8 +148,13 @@ const ProductDetails = ({data}) => {
     };
 
     const [open, setOpen] = useState(false);
+    const [option, setOption] = useState({
+        bg: '',
+        message: ''
+    });
     
-    const snackbarClick = () => {
+    const snackbarClick = (bg, message) => {
+        setOption({bg, message});
         setOpen(true);
     };
 
@@ -154,12 +171,12 @@ const ProductDetails = ({data}) => {
             onClose={snackbarClose}
         >
             <SnackbarContent style={{
-                    backgroundColor:'#da393de0',
+                    backgroundColor:option.bg,
                 }}
                 message={ 
                 <div className="">
                     <i className="fas fa-exclamation-circle mr-2"></i> 
-                    <span id="client-snackbar">Please Select your Shoe Size</span>
+                    <span id="client-snackbar">{option.message}</span>
                     <span onClick={snackbarClose}>
                         <i className="fas fa-times float-right mt-0.5 cursor-pointer"></i>
                     </span>
@@ -254,7 +271,7 @@ const ProductDetails = ({data}) => {
                 ORDER NOW
             </a>
             { error ? <p className="text-rose-900 mb-2">{error}</p> : ''}
-            <button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mb-3 rounded">
+            <button onClick={cartNow} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mb-3 rounded">
                 ADD TO CART
             </button>
             <button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded">
@@ -374,7 +391,7 @@ const ProductDetails = ({data}) => {
                         ORDER NOW
                     </a>
                     { error ? <p className="text-rose-900 mb-2">{error}</p> : ''}
-                    <button className="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 mb-3 rounded">
+                    <button onClick={cartNow} className="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 mb-3 rounded">
                         ADD TO CART
                     </button>
                     <button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded">

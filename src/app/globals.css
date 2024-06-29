@@ -121,6 +121,21 @@ body {
 .MuiSnackbarContent-message{
   width: 100%;
 }
+
+.shopping-cart sup {
+  position: absolute;
+  top: -1px;
+  left: 6px;
+  width: 23px;
+  height: 22px;
+  font-size: 12px;
+  line-height: 20px;
+  margin: 0;
+  border-radius: 50%;
+  text-align: center;
+  background: red;
+  border: 1px solid #ffffff;
+}
 @media (max-width:640px) {
   .select-size{
     padding: 10px 24px;

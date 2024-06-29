@@ -1,6 +1,10 @@
+'use client'
+
 import Link from "next/link"
+import { useSelector } from "react-redux"
 
 const Navbar = () =>{
+    const { cartItems } = useSelector((state:any) => state.cart)
     return(
         <nav className="bg-white border-gray-200">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -44,8 +48,9 @@ const Navbar = () =>{
                         </li>
                     </ul>
                 </div>
-                <Link href="/checkout" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <Link href="/cart" className="flex relative shopping-cart items-center space-x-3 rtl:space-x-reverse">
                     <img src="../../../../icons/shopping-bag 1.svg" className="h-8" alt="Flowbite Logo" />
+                    <sup>{ cartItems.length ?? 0}</sup>
                 </Link>
             </div>
         </nav>
