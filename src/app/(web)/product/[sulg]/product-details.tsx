@@ -259,7 +259,7 @@ const ProductDetails = ({data}) => {
                     data?.attributes[0]?.options.map(
                         (option, idx) => <span key={idx}
                             className={`select-size ${option == size.number ? 'active' : ''} `} 
-                            onClick={()=> {setSize({number: option == size.number ? '' : option, key:idx}); setError('')}}
+                            onClick={()=> {setSize({number: option, key:idx}); setError('')}}
                         >{option}</span>
                     )
                 }
@@ -382,7 +382,7 @@ const ProductDetails = ({data}) => {
                         data?.attributes[0]?.options.map(
                             (option, idx) => <span key={idx}
                                 className={`select-size ${option == size.number ? 'active' : ''} `} 
-                                onClick={()=> {setSize({number: option == size.number ? '' : option, key:idx}); setError('')}}
+                                onClick={()=> {setSize({number: option, key:idx}); setError('')}}
                             >{option}</span>
                         )
                     }
