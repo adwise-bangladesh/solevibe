@@ -189,7 +189,7 @@ const Checkout = () => {
                            
                         </div>
                         <FormikProvider value={formik} >
-                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-2">
+                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-4">
                                 <Form className="space-y-3" action="#" method="POST">
                                     <div>
                                         <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
