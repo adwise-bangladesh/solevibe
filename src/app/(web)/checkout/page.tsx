@@ -182,14 +182,14 @@ const Checkout = () => {
                 cartItems.length > 0 ? 
                 <div className="min-h-svh">
                     <div className="container mx-auto">
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center">
                             <h3 className="font-bold leading-9 mx-auto justify-center text-gray-900">
                                 Please fill Up The Form To Complete The Order
                             </h3>
                            
                         </div>
                         <FormikProvider value={formik} >
-                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-4">
+                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-2">
                                 <Form className="space-y-3" action="#" method="POST">
                                     <div>
                                         <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
@@ -366,7 +366,7 @@ const Checkout = () => {
                                     </div>
                                 </Form>
                             </div>
-                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-4">
+                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-2">
                                 {
                                     cartItems?.map((product, idx)=>
                                         <div className="grid grid-cols-7 gap-3 p-2 mb-3 bg-[#fff] border border-gray-200 rounded-lg" key={idx}>
@@ -451,7 +451,7 @@ const Checkout = () => {
 
                                 <div className="flex justify-center mt-6">
                                     <p className="mx-auto text-sm text-center text-red-600">
-                                        If you Don’t Receive The Product Then Please Pay the Delivery Charge.
+                                        If You Don’t Receive The Product Then Please Pay the Delivery Charge.
                                     </p>
                                 </div>
                             </div>
