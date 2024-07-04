@@ -236,12 +236,12 @@ const ProductDetails = ({data}) => {
                 </div>
             </div>
             <p className="font-bold text-lg text-red-600 pr-3">CODE: {data?.sku}</p>
-            <div className="pricing flex justify-center mb-3">
+            <div className="pricing flex mb-3">
                 <p className="font-bold text-lg text-red-600 pr-3">PRICE:</p>
                 {
                     data?.sale_price ? (
                         <>
-                            <p className="regular text-sm text-grey font-bold line-through flex pr-1">
+                            <p className="regular text-sm text-grey font-bold line-through flex items-center pr-1">
                                 TK {data?.regular_price}
                             </p>
                             <p className="discount text-lg font-bold text-red">TK {data?.sale_price}</p>
