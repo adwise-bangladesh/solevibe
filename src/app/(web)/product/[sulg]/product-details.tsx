@@ -217,7 +217,7 @@ const ProductDetails = ({data}) => {
                 </Slider>
             </div>
             <h3 className="text-xl font-bold leading-6 mt-6 text-gray-900">
-                {data?.name} {data?.id}
+                {data?.name}
             </h3>
             <div className="rating-data">
                 <div className="grid grid-cols-8 py-2">
@@ -274,9 +274,11 @@ const ProductDetails = ({data}) => {
             <button onClick={cartNow} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mb-3 rounded">
                 ADD TO CART
             </button>
+            <Link  href={`https://api.whatsapp.com/send?phone=1926644575&text=Name:%20${encodeURIComponent(data?.name)}%0ACode:%20${encodeURIComponent(data?.sku)}%0APrice:%20${encodeURIComponent(data?.price)}%0ASource:%20solevibe.xyz`} target="_blank" rel="noopener noreferrer">
             <button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded">
                 WhatsApp Order
             </button>
+            </Link>
             <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
                 Call Now: 01926644575
             </button>
