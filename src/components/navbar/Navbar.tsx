@@ -49,7 +49,7 @@ const Navbar = () =>{
                     </ul>
                 </div>
                 <Link href="/cart" className="flex relative shopping-cart items-center space-x-3 rtl:space-x-reverse">
-                    <svg className="w-10 h-10 text-gray-800 dark:text-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <svg className="w-10 h-10 text-gray-800 dark:text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z"/>
           </svg>
 <sup>{ cartItems.length ?? 0}</sup>
