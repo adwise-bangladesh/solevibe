@@ -175,3 +175,6 @@ background-color: #EFEFEF;
 .bx-shadow {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06)!important;
 }
+.dark\:text-gray-800{
+color: rgb(65 65 65)!important;
+}
