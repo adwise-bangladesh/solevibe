@@ -172,3 +172,5 @@ background-color: #EFEFEF;
     border-radius: 5px;
     font-size: 14px;
 }
+.bx-shadow{
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.06);
