@@ -274,8 +274,8 @@ const ProductDetails = ({data}) => {
             <button onClick={cartNow} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mb-3 rounded">
                 ADD TO CART
             </button>
-            <a href={`https://api.whatsapp.com/send?phone=1926644575&text=Name:%20${encodeURIComponent(data?.name)}%0ACode:%20${encodeURIComponent(data?.sku)}%0APrice:%20${encodeURIComponent(data?.price)}%0ASource:%20solevibe.xyz`} target="_blank" rel="noopener noreferrer"> className={`block text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
-                WhatsApp Order
+            <a href={`https://api.whatsapp.com/send?phone=1926644575&text=Name:%20${encodeURIComponent(data?.name)}%0ACode:%20${encodeURIComponent(data?.sku)}%0APrice:%20${encodeURIComponent(data?.price)}%0ASource:%20solevibe.xyz`} target="_blank" rel="noopener noreferrer" className={`block text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
+                   WhatsApp Order
             </a>
             <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
                 Call Now: 01926644575
@@ -394,7 +394,7 @@ const ProductDetails = ({data}) => {
                     <button onClick={cartNow} className="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 mb-3 rounded">
                         ADD TO CART
                     </button>
-                    <a href={`https://api.whatsapp.com/send?phone=1926644575&text=Name:%20${encodeURIComponent(data?.name)}%0ACode:%20${encodeURIComponent(data?.sku)}%0APrice:%20${encodeURIComponent(data?.price)}%0ASource:%20solevibe.xyz`} target="_blank" rel="noopener noreferrer"> className={`block text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
+                    <a href={`https://api.whatsapp.com/send?phone=1926644575&text=Name:%20${encodeURIComponent(data?.name)}%0ACode:%20${encodeURIComponent(data?.sku)}%0APrice:%20${encodeURIComponent(data?.price)}%0ASource:%20solevibe.xyz`} target="_blank" rel="noopener noreferrer" className={`block text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
                 WhatsApp Order
             </a>
                     <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
