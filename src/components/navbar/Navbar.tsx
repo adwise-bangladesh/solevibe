@@ -16,7 +16,7 @@ const Navbar = () =>{
                 </Link>
 
                 <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src={'../../../../icons/Solevibe Logo 1.svg'} className="h-12 sm:h-12" alt="Flowbite Logo" />
+                    <img src={'../../../../icons/Solevibe Logo 1.svg'} className="h-10 sm:h-10" alt="Flowbite Logo" />
                 </a>
                 <div className="hidden w-full lg:block lg:w-auto" id="navbar-multi-level">
                     <ul className="flex flex-col font-medium p-4 lg:p-0 mt-4 
