@@ -182,29 +182,20 @@ const Checkout = () => {
                 cartItems.length > 0 ? 
                 <div className="min-h-svh">
                     <div className="container mx-auto">
-                        <div className="flex justify-center">
-                            <h3 className="font-bold leading-9 mx-auto text-gray-900">
+                        <div className="flex justify-center items-center">
+                            <h3 className="font-bold leading-9 mx-auto justify-center text-gray-900">
                                 Please fill Up The Form To Complete The Order
                             </h3>
-                            <button onClick={showSwal}>Show </button>
+                           
                         </div>
                         <FormikProvider value={formik} >
-                            <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">
-                                <Form className="space-y-6" action="#" method="POST">
+                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-2">
+                                <Form className="space-y-3" action="#" method="POST">
                                     <div>
                                         <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
                                             Your Name
                                         </label>
-                                        <div className="mt-2">
-                                            {/* <input
-                                                id="name"
-                                                name="name"
-                                                type="name"
-                                                autoComplete="name"
-                                                required
-                                                placeholder="Name"
-                                                className="block w-full px-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            /> */}
+                                        <div className="form-item">
 
                                             <Field
                                                 onChange={formik.handleChange}
@@ -375,19 +366,19 @@ const Checkout = () => {
                                     </div>
                                 </Form>
                             </div>
-                            <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">
+                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-2">
                                 {
                                     cartItems?.map((product, idx)=>
-                                        <div className="grid grid-cols-7 gap-3 p-3 mb-3 bg-[#fff] border border-gray-200 rounded-lg" key={idx}>
-                                            <div className="bg-blue-100 col-span-2">
+                                        <div className="grid grid-cols-7 gap-3 p-2 mb-3 bg-[#fff] border border-gray-200 rounded-lg" key={idx}>
+                                            <div className=" col-span-2">
                                                 <img src={product?.image} className="w-screen" alt="Flowbite Logo" />
                                             </div>
                                             <div className="col-span-5">
-                                                <h5 className="text-black">{product?.name}</h5>
-                                                <span className="text-black">Size: { product?.size ? product?.size.replace(/\D/g, "") : 0 }</span>
+                                                <h6 className="text-black font-small">{product?.name}</h6>
+                                                <span className="text-black font-small size-box">Size: { product?.size ? product?.size.replace(/\D/g, "") : 0 }</span>
                                                 <div className="grid grid-cols-9 gap-3">
                                                     <div className="col-span-5">
-                                                        <p className="text-lg font-bold text-red-600">TK {product?.price}</p>
+                                                        <p className="text-sm mt-2 font-bold text-red-600">TK {product?.price}</p>
                                                     </div>
                                                     <div className="col-span-4">
                                                         <div className="grid grid-cols-3 gap-4">
@@ -445,22 +436,22 @@ const Checkout = () => {
                                     </h3>
                                 </div>
 
-                                <div className="grid grid-cols-7 gap-3 py-5 px-8 bg-[#fff] border border-gray-200 rounded-lg">
-                                    <div className="col-span-5">
-                                        <p className="text-lg text-black mb-2">Subtotal: </p>
-                                        <p className="text-lg text-black mb-2">Delivery Charge: </p>
-                                        <p className="text-lg text-black mb-2">Total: </p>
+                                <div className="grid grid-cols-7 gap-3 py-5 px-2 bg-[#fff] border border-gray-400 rounded-lg">
+                                    <div className="col-span-4">
+                                        <p className="text-sm text-black mb-2">Subtotal: </p>
+                                        <p className="text-sm text-black mb-2">Delivery Charge: </p>
+                                        <p className="text-sm text-black mb-2">Total: </p>
                                     </div>
-                                    <div className="col-span-2"> 
-                                        <p className="text-lg text-red-600 mb-2"> TK {itemsPrice} </p>
-                                        <p className="text-lg text-red-600 mb-2"> TK {Number(formik?.values?.shipping_area)} </p>
-                                        <p className="text-lg text-red-600 mb-2"> TK {Number(formik?.values?.shipping_area) + Number(itemsPrice) } </p>
+                                    <div className="col-span-3"> 
+                                        <p className="text-sm text-red-600 mb-2 font-bold"> TK {itemsPrice} </p>
+                                        <p className="text-sm text-red-600 mb-2 font-bold"> TK {Number(formik?.values?.shipping_area)} </p>
+                                        <p className="text-sm text-red-600 mb-2 font-bold"> TK {Number(formik?.values?.shipping_area) + Number(itemsPrice) } </p>
                                     </div>
                                 </div>
 
                                 <div className="flex justify-center mt-6">
-                                    <p className="mx-auto text-center text-red-600">
-                                        If you Don’t Receive The Product Then Please Pay <br /> the Delivery Charge.
+                                    <p className="mx-auto text-sm text-center text-red-600">
+                                        If you Don’t Receive The Product Then Please Pay the Delivery Charge.
                                     </p>
                                 </div>
                             </div>
