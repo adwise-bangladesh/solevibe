@@ -30,6 +30,7 @@ const Product = ({product, key}) => {
 
     return(
         <>
+            <Link href={`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`} >
             <div className="relative max-w-sm m-3 bg-grey products rounded" id={productId}>
                 <div>
                     {/* <img src={product?.images[0]?.src} className="w-screen" alt="Flowbite Logo" /> */}
@@ -81,6 +82,7 @@ const Product = ({product, key}) => {
                     </button>
                 </div>
             </div>
+            </Link>
         </>
     )
 }
