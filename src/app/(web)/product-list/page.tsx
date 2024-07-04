@@ -19,8 +19,8 @@ const ProductList = () => {
             <div className="banner w-100">
                 <div 
                     className="h-96 w-full bg-cover bg-center bg-no-repeat 
-                    bg-[url('https://shop.shajgoj.com/wp-content/uploads/2023/01/Web-banner-coupon-Free-delivery-Web.jpg')] 
-                    lg:bg-[url('https://shop.shajgoj.com/wp-content/uploads/2023/01/Web-banner-coupon-Free-delivery-2.jpg')]"
+                    bg-[url('https://backend.solevibe.xyz/banner/mobile/banner1.jpg')] 
+                    lg:bg-[url('https://backend.solevibe.xyz/banner/desktop/banner1.jpg')]"
                 ></div>
             </div>
             <div className="container mx-auto ">
