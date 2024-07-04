@@ -366,7 +366,7 @@ const Checkout = () => {
                                     </div>
                                 </Form>
                             </div>
-                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-2">
+                            <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-4">
                                 {
                                     cartItems?.map((product, idx)=>
                                         <div className="grid grid-cols-7 gap-3 p-2 mb-3 bg-[#fff] border border-gray-200 rounded-lg" key={idx}>
