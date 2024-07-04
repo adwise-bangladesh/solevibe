@@ -100,19 +100,19 @@ const Checkout = () => {
                 cartItems.length > 0 ? 
                 <div className="min-h-svh">
                     <div className="container mx-auto">
-                        <div className="border border-gray-200 rounded-lg shadow p-5 bg-[#EFEFEF] my-10 mx-6">
+                        <div className="border rounded-lg p-3 bg-[#EFEFEF] my-5 mx-2">
                             {
                                 cartItems?.map((product, idx)=>
                                     <div className="grid grid-cols-7 gap-3 p-3 mb-3 bg-[#fff] border border-gray-200 rounded-lg" key={idx}>
-                                        <div className="bg-blue-100 col-span-2">
+                                        <div className="col-span-2">
                                             <img src={product?.image} className="w-screen" alt="Flowbite Logo" />
                                         </div>
                                         <div className="col-span-5">
-                                            <h5 className="text-black">{product?.name}</h5>
-                                            <span className="text-black">Size: { product?.size ? product?.size.replace(/\D/g, "") : 0 }</span>
+                                            <h5 className="text-black font-small">{product?.name}</h5>
+                                            <span className="text-black font-small size-box">Size: { product?.size ? product?.size.replace(/\D/g, "") : 0 }</span>
                                             <div className="grid grid-cols-9 gap-3">
                                                 <div className="col-span-5">
-                                                    <p className="text-lg font-bold text-red-600">TK {product?.price}</p>
+                                                    <p className="text-sm mt-2 font-bold text-red-600">TK {product?.price}</p>
                                                 </div>
                                                 <div className="col-span-4">
                                                     <div className="grid grid-cols-3 gap-4">
@@ -142,11 +142,11 @@ const Checkout = () => {
                             
 
                             <div className="grid grid-cols-7 gap-3 py-5 px-8 bg-[#fff] border border-gray-200 rounded-lg">
-                                <div className="col-span-5">
-                                    <p className="text-lg text-black mb-2">Subtotal: </p>
+                                <div className="col-span-4">
+                                    <p className="text-sm text-black mb-2 font-bold">Subtotal: </p>
                                 </div>
-                                <div className="col-span-2"> 
-                                    <p className="text-lg text-red-600 mb-2"> TK {itemsPrice} </p>
+                                <div className="col-span-3"> 
+                                    <p className="text-sm text-red-600 mb-2 font-bold"> TK {itemsPrice} </p>
                                 </div>
                             </div>
                             <Link href={'/checkout'} className="block text-center w-full bg-red-700 hover:bg-red-600 text-white uppercase text-sm  py-2 px-4 my-3 rounded">
@@ -154,8 +154,8 @@ const Checkout = () => {
                             </Link>
 
                             <div className="flex justify-center mt-6">
-                                <p className="mx-auto text-center text-red-600">
-                                    If you Don’t Receive The Product Then Please Pay <br /> the Delivery Charge.
+                                <p className="mx-auto text-sm text-center text-red-600">
+                                    If You Don’t Receive The Product Then Please Pay the Delivery Charge.
                                 </p>
                             </div>
                         </div>
