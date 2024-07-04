@@ -7,7 +7,7 @@ const Navbar = () =>{
     const { cartItems } = useSelector((state:any) => state.cart)
     return(
         <nav className="bg-white border-gray-200 bx-shadow">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
+            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link href="https://api.whatsapp.com/send?phone=1926644575&text=I%20want%20to%20order%20from%20solevibe.xyz" className="flex relative shopping-cart items-center space-x-3 rtl:space-x-reverse">
                 <svg className="w-8 h-8 text-gray-800 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
