@@ -31,7 +31,7 @@ body {
     color: #000;
     padding: 10px 80px;
     border-radius: 5px;
-    margin: 12px;
+    margin: 5px;
     cursor: pointer;
     transition: all linear 0.3s;
   }
@@ -158,3 +158,17 @@ background-color: #EFEFEF;
   color:#EC1E24;
 }
 /*****END OF UPDATE BY TARIQUL***/
+.rounded, .rounded-lg{
+  border-radius: 5px!important;
+}
+
+.font-small{
+  font-size: 14px;
+}
+
+.size-box{
+  border: 1px solid #e2e2e2;
+    padding: 3px;
+    border-radius: 5px;
+    font-size: 14px;
+}
