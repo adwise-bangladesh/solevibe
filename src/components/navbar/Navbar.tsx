@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 const Navbar = () =>{
     const { cartItems } = useSelector((state:any) => state.cart)
     return(
-        <nav className="bg-white border-gray-200">
+        <nav className="bg-white border-gray-200 bx-shadow">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <button data-collapse-toggle="navbar-multi-level" type="button" 
                     className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 
