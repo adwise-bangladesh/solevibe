@@ -362,17 +362,17 @@ const ProductDetails = ({data}) => {
                     }
                     </div>
                     <a onClick={orderNow} className={`block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
-                        ORDER NOW
+                        {language.orderNow}
                     </a>
                     { error ? <p className="text-rose-900 mb-2">{error}</p> : ''}
                     <button onClick={cartNow} className="w-full bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 mb-3 rounded">
-                        ADD TO CART
+                        ADD TO CART{language.addToCart}
                     </button>
                     <a href={`https://api.whatsapp.com/send?phone=1926644575&text=Name:%20${encodeURIComponent(data?.name)}%0ACode:%20${encodeURIComponent(data?.sku)}%0APrice:%20${encodeURIComponent(data?.price)}%20Tk%0AWebsite:%20solevibe.xyz`} target="_blank" rel="noopener noreferrer" className={`block text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
-                WhatsApp Order
-            </a>
+                        {language.whtsAppOrder}
+                    </a>
                     <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
-                        Call Now: 01926644575
+                        {language.callNow}: {language.Number}
                     </button>
                 </div>
             </div>
