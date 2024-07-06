@@ -11,7 +11,6 @@ import language from '../../../service/data/language.json'
 const Product = ({product, key}) => {
     const [rating, setRating] = useState(0);
     const router = useRouter();
-    console.log('product', product)
     const id = product?.id
     const productId = idEncryption(id)
     const orderNow = () => {

@@ -39,18 +39,11 @@ const Checkout = () => {
         setCount((prevState) => prevState - 1);
         }
     };
-    // ____________________
     
     const dispatch = useDispatch()
 
     const { cartItems, itemsPrice, paymentMethod } = useSelector((state:any) => state.cart)
     const [qty, setQty] = useState(1)
-
-    console.log('cartItems', cartItems)
-    console.log('itemsPrice', itemsPrice)
-    console.log('paymentMethod', paymentMethod)
-
-
     const removeFromCartHandler = (id, size) => {
         Swal.fire({
             title: "Do you want to remove item?",
@@ -103,7 +96,6 @@ const Checkout = () => {
 
     })
     const onSubmit = async (values: any) => {
-        console.log("Form Submit", values);
         setLoading(true)
         const res = await fetch(environment.API_URL+'orders',{
             method: 'POST',

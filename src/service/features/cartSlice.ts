@@ -55,7 +55,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<CartItem>) => {
-      // console.log('cart state:', state)
       const item = action.payload;
       const existItem = state.cartItems.find((x) => x?.id === item?.id && x?.size == item?.size);
       if (existItem) {
@@ -81,9 +80,7 @@ const cartSlice = createSlice({
     },
 
     removeFromCart: (state, action: PayloadAction<removeItem>) => {
-      console.log('PayloadAction', action.payload)
       state.cartItems = state.cartItems.filter((x) => {
-        console.log('item-x', x.id, x.size)
         return (x.id == action.payload.id && x.size == action.payload.size) ? false : true
       });
       state.itemsPrice = addDecimals(

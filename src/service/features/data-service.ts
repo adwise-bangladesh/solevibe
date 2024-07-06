@@ -1,10 +1,7 @@
 const fs = require("fs");
 
 export const setProducts = (products) => {
-    // console.log("hello:", products);
-    
     const jsonString = JSON.stringify(products)
-    console.log('upper')
     const writeJson = fs.writeFile('src/service/data/products.json', jsonString, (err:any) => {
         if (err) {
             console.log('Error writing file', err)
@@ -12,8 +9,6 @@ export const setProducts = (products) => {
             console.log('Successfully wrote file')
         }
     })
-
-    // console.log(writeJson)
 }
 export const getProducts = () => {
     try {

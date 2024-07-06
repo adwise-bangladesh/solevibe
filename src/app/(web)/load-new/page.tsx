@@ -23,7 +23,6 @@ async function getData() {
 
 const TestPage = async () => {
     const res = await getData()
-    // loading = false;
     return (
         <>
             <div className="text-black">{res?.ok ? 'ok' : "Something went wrong"}</div>

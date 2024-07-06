@@ -3,11 +3,6 @@
 import { addToCart, emptyCart, removeFromCart, savePaymentMethod } from '@/service/features/cartSlice';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    useFormik, Form, Field,
-    FormikProvider, ErrorMessage,
-} from "formik";
-import * as Yup from "yup";
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2'
 import Image from 'next/image'
@@ -38,15 +33,8 @@ const Checkout = () => {
     // ____________________
     
     const dispatch = useDispatch()
-
     const { cartItems, itemsPrice, paymentMethod } = useSelector((state:any) => state.cart)
     const [qty, setQty] = useState(1)
-
-    console.log('cartItems', cartItems)
-    console.log('itemsPrice', itemsPrice)
-    console.log('paymentMethod', paymentMethod)
-
-
     const removeFromCartHandler = (id, size) => {
         Swal.fire({
             title: "Do you want to remove item?",
@@ -77,21 +65,6 @@ const Checkout = () => {
     
     const addToCartHandler = async (product, qty) => {
         dispatch(addToCart({ ...product, qty }))
-    }
-
-
-    const showSwal = () => {
-        // Swal.fire({
-        //     title: "Do you want to remove item?",
-        //     showCancelButton: true,
-        //     confirmButtonText: "Remove",
-        // }).then((result) => {
-        //     /* Read more about isConfirmed, isDenied below */
-        //     if (result.isConfirmed) {
-        //     //   Swal.fire("Saved!", "", "success");
-        //     } 
-        // });
-        // dispatch(emptyCart())
     }
 
     return (

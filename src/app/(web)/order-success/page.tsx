@@ -14,8 +14,6 @@ const OrderSuccess = () => {
     useEffect(() => {
         dispatch(emptyCart())
     }, []);
-    console.log('itemsPrice', itemsPrice)
-    console.log('paymentMethod', paymentMethod)
     return (
         <div className="min-h-svh">
             <div className="container mx-auto">

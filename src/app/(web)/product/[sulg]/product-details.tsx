@@ -26,9 +26,7 @@ const ProductDetails = ({data}) => {
 
     const addToCartHandler = () => {
         let newQty = qty
-        console.log('qty', qty)
         const existItem = cartItems.find((x) => x.id === data.id && x.size == size.number)
-        console.log('existItem', existItem)
         if (existItem) {
         //   if (existItem.qty + 1 <= product.countInStock) {
             newQty = existItem.qty + 1
@@ -50,7 +48,6 @@ const ProductDetails = ({data}) => {
     }
 
     const orderNow = () => {
-        console.log('size.number', size.number)
         if(size.number){
             addToCartHandler();
             setTimeout(
@@ -63,7 +60,6 @@ const ProductDetails = ({data}) => {
         }
     }
     const cartNow = () => {
-        console.log('cart cart')
         if(size.number){
             addToCartHandler();
             snackbarClick('#30b04d', 'Product added successfully')

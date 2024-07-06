@@ -13,7 +13,6 @@ const SingleProduct = ({searchParams}) => {
     let product:any
     const value = localStorage.getItem('solo_product');
     product = JSON.parse(value!)
-    console.log('product_solo:', product)
     // const product = getSingleProduct(id);
     return (
         <>
