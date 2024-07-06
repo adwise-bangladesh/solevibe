@@ -6,14 +6,11 @@ import Link from 'next/link'
 import { idEncryption } from '@/service/helpers/DataHelper';
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
+import language from '../../../service/data/language.json'
 
 const Product = ({product, key}) => {
     const [rating, setRating] = useState(0);
     const router = useRouter();
-    // const handleStarClick = (nextValue:any, prevValue:any, name:any) => {
-    //     setRating(nextValue);
-    // }
     console.log('product', product)
     const id = product?.id
     const productId = idEncryption(id)
@@ -46,7 +43,6 @@ const Product = ({product, key}) => {
                     <div className="p-1">
                             <Link href={`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`} >
                                 <h5 className="text-center text-sm font-bold tracking-tight text-gray-900 text-black">
-                                    {/* Casual Nubuck Lace-Up Shoe For Men SB-S559 | Premium */}
                                     {product?.name}
                                 </h5>
                             </Link>
@@ -78,7 +74,7 @@ const Product = ({product, key}) => {
                         font-medium text-center text-white bg-red 
                         rounded hover:bg-red flex-auto w-full"
                     >
-                        Order Now
+                        {language.orderNow}
                     </button>
                 </div>
             </div>

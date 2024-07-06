@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { setProducts } from "../../../service/features/data-service";
+import  environment  from "../../../environments/environment"
 const fs = require("fs");
 
 async function getData() {
     
-    const res = await fetch('https://backend.solevibe.xyz/wp-json/wc/v3/products?per_page=100',{
+    const res = await fetch(environment.API_URL+'products?per_page=100',{
         headers: {
-            Authorization: `Basic Y2tfZTljOWYyZDhiNDkzZTUzNjM5ODBlNzllZmJiMDFiZjUxOTdjM2E0NTpjc19iYWQ1MWI0NTJjYTI0ZjFiNTM3MDQwMmFhOTFkYjI3NjRjYTFlOGJj`
+            Authorization: environment.Authorization
         }
     })
     if (!res?.ok) {

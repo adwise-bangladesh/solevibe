@@ -1,12 +1,9 @@
 
-
 import Navbar from "@/components/navbar/Navbar";
-
 import { useGetAllProductsQuery } from "@/service/features/products/ProductsApi";
 import Product from "./product";
 import { BulletList } from 'react-content-loader'
 import Footer from "@/components/footer/Footer";
-import ProductListLoader from "@/components/loader/ProductListLoader";
 import { getProducts, setProducts } from "../../../service/features/data-service";
 
 

@@ -1,20 +1,16 @@
 import StarRating from "react-rating-stars-component";
-import { useState, useEffect, Fragment } from 'react';
+import { useState} from 'react';
 import Image from 'next/image'
-import product from '@images/images/product.svg'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import preImage from '@images/images/no-image.png';
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/service/features/cartSlice";
-import Button from '@mui/material/Button';
-import Snackbar, { SnackbarOrigin } from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
+import Snackbar from '@mui/material/Snackbar';
 import { SnackbarContent } from "@mui/material";
-import { ClassNames } from "@emotion/react";
-import Cookies from 'js-cookie';
+import language from '../../../../service/data/language.json'
 
 const ProductDetails = ({data}) => {
     const [productImg, setProductImg] = useState(data?.images[0]?.src);
@@ -251,7 +247,7 @@ const ProductDetails = ({data}) => {
             </div>
             <div className="flex justify-center mt-3">
                 <h3 className="leading-9 mx-auto text-lg text-[#EC1E24]">
-                    Please Select your Shoe Size
+                    {language.selectShoeSize}
                 </h3>
             </div>
             <div className="flex flex-wrap justify-evenly bg-[#EC1E24] my-4 py-2 rounded">
@@ -268,17 +264,17 @@ const ProductDetails = ({data}) => {
 
             }
             <a onClick={orderNow} className={`block text-center bg-gray-900 hover:bg-gray-800 text-white font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
-                ORDER NOW
+                {language.orderNow}
             </a>
             { error ? <p className="text-rose-900 mb-2">{error}</p> : ''}
             <button onClick={cartNow} className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 mb-3 rounded">
-                ADD TO CART
+                {language.addToCart}
             </button>
            <a href={`https://api.whatsapp.com/send?phone=1926644575&text=Name:%20${encodeURIComponent(data?.name)}%0ACode:%20${encodeURIComponent(data?.sku)}%0APrice:%20${encodeURIComponent(data?.price)}%20Tk%0AWebsite:%20solevibe.xyz`} target="_blank" rel="noopener noreferrer" className={`block text-center bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 px-4 mb-3 rounded font-bold py-2 px-4 ${error ? '' : 'mb-3'}  rounded cursor-pointer`}>
-                   WhatsApp Order
+                {language.whtsAppOrder}
             </a>
             <button className="w-full bg-white text-black border border-black font-bold py-2 px-4 mb-3 rounded">
-                Call Now: 01926644575
+                {language.callNow}: {language.Number}
             </button>
         </div>
         {/* For large screen */}
@@ -290,15 +286,6 @@ const ProductDetails = ({data}) => {
                             <div className="vartical-slider">
                                 <Slider {...settingsNext}>
                                 {
-                                    // isLoading ? 
-                                    // <Image
-                                    //     src={preImage}
-                                    //     alt="product"
-                                    //     width={0}
-                                    //     height={0}
-                                    //     sizes="100vw"
-                                    //     style={{ width: '100%', height: '120px', objectFit: 'cover', borderRadius: '5px' }} // optional
-                                    // /> :
                                     data?.images?.map((image, idx)=>{
                                         return(
                                             <div className="text-black bg-[green] rounded" key={1+idx}>
@@ -369,15 +356,6 @@ const ProductDetails = ({data}) => {
                         </h3>
                     </div>
                     <div className="flex flex-wrap justify-evenly bg-[#EC1E24] px-3 my-3 rounded">
-                    {/* {
-                        data?.attributes[0]?.options.map(
-                            (option, idx) => <span key={11+idx}
-                                className={`select-size ${option == size ? 'active' : ''} `} 
-                                onClick={()=> {setSize(option == size ? '' : option); setError('')}}
-                            >{option}</span>
-                        )
-                    } */}
-
                     {
                         data?.attributes[0]?.options.map(
                             (option, idx) => <span key={idx}
