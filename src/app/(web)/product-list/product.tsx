@@ -20,7 +20,7 @@ const Product = ({product, key}) => {
             localStorage.setItem('solo_product', JSON.stringify(product));
         }
         setTimeout(
-            ()=>router.push(`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}`), 200
+            ()=>router.push(`/product/${product?.slug ? product?.slug : product?.name?.replace(/\s+/g, '-')}?product=${productId}`), 200
         )
     }
 

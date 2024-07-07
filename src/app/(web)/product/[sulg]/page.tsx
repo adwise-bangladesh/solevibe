@@ -6,14 +6,25 @@ import { getSingleProduct } from "@/service/features/data-service";
 import Image from 'next/image'
 import footwareSize from '@images/images/footware-size.svg';
 import Cookies from 'js-cookie';
+import { useGetSingleProductQuery } from "@/service/features/products/ProductsApi";
+import environment from "@/environments/environment";
 
 const SingleProduct = ({searchParams}) => {
-    // const tmpCode = Number(searchParams.product);
-    // const id = idDecryption(tmpCode);
+    const tmpCode = Number(searchParams.product);
+    const id = idDecryption(tmpCode);
     let product:any
     const value = localStorage.getItem('solo_product');
-    product = JSON.parse(value!)
+    
+    if(value){
+        console.log('value exist')
+        product = JSON.parse(value!)
+    }else{ 
+        const {data, isLoading } = useGetSingleProductQuery(id)
+        product = data
+    }
+    
     // const product = getSingleProduct(id);
+
     return (
         <>
             <div className="min-h-svh">

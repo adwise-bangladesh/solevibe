@@ -1,5 +1,5 @@
 import StarRating from "react-rating-stars-component";
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import Image from 'next/image'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -23,6 +23,10 @@ const ProductDetails = ({data}) => {
     const dispatch = useDispatch()
     const { cartItems } = useSelector((state:any) => state.cart)
     const [qty, setQty] = useState(1)
+    
+    useEffect(()=>{
+        setProductImg(data?.images[0]?.src)
+    },[data?.images[0]?.src])
 
     const addToCartHandler = () => {
         let newQty = qty
